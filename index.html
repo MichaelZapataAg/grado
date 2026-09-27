@@ -6,11 +6,7 @@
 <title>La última misión · Maik Zapata</title>
 <meta name="theme-color" content="#1a1033">
 <meta property="og:title" content="La última misión · Maik se gradúa">
-<meta property="og:description" content="Ayudá a Maik con su última misión. 17 de octubre.">
-<meta property="og:image" content="https://michaelzapataag.github.io/grado/assets/og.png">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:url" content="https://michaelzapataag.github.io/grado/">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="Ayuda a Maik con su última misión. 17 de octubre.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Silkscreen:wght@400;700&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -105,7 +101,9 @@ body[data-state="title"] #bg{display:none}
 .title-bot{margin-top:10px;margin-bottom:auto;gap:10px}
 .imgbtn{width:192px;height:64px;background:url(assets/boton.png) no-repeat center/100% 100%;image-rendering:pixelated;display:block;transition:transform .12s cubic-bezier(.2,.8,.2,1)}
 .imgbtn:active,.imgbtn.pressed{background-image:url(assets/boton-presionado.png);transform:translateY(3px) scale(.98)}
-.title-bot .for{margin:0}
+.title-bot .for{margin:0;display:flex;flex-direction:column;gap:2px;font-size:20px;line-height:1.15}
+.for div{opacity:0;transform:translateY(6px);animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards}
+.for div.esp b{color:#ff9fc4}
 .title-top{display:flex;justify-content:space-between;width:100%;color:var(--white)}
 .title-block{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:8px}
 h1.px{font-size:min(54px,13vw);line-height:.92;text-transform:uppercase}
@@ -254,7 +252,7 @@ body[data-state="menu"] .nav{display:block}
     <img class="sobre" src="assets/sobre.png" alt="Maik asomado detrás de un sobre sellado" draggable="false">
   </div>
   <div class="title-bot">
-    <p class="for out rv-pop" style="animation-delay:.9s">Invitado <span id="pnum">1</span>: <b id="pname">Vos</b></p>
+    <div class="for out" id="guestlist"></div>
     <button class="imgbtn rv-pop" id="start" aria-label="Toca para empezar" style="animation-delay:.6s"></button>
     <p class="rv-pop" style="animation-delay:1.1s"><button id="snd" class="chip">♪ Sonido: off</button></p>
   </div>
@@ -275,10 +273,10 @@ body[data-state="menu"] .nav{display:block}
 <!-- GAME -->
 <section class="screen" id="s-game">
   <div class="gtop">
-    <div class="panel mission"><span class="hud">Misión</span><p>Ayudá a Maik a conseguir los 3 objetos para graduarse.</p></div>
+    <div class="panel mission"><span class="hud">Misión</span><p>Ayuda a Maik a conseguir los 3 objetos para graduarse.</p></div>
     <div class="slots"><div class="items"><canvas id="sl0" width="8" height="8"></canvas><canvas id="sl1" width="8" height="8"></canvas><canvas id="sl2" width="8" height="8"></canvas></div><span class="count"><span id="got">0</span>/3</span></div>
   </div>
-  <div class="gbot"><span class="tapzone">Tocá la pantalla para saltar</span><button class="skip" id="gskip">Saltar misión</button></div>
+  <div class="gbot"><span class="tapzone">Toca la pantalla para saltar</span><button class="skip" id="gskip">Saltar misión</button></div>
 </section>
 
 <!-- WIN -->
@@ -303,7 +301,7 @@ body[data-state="menu"] .nav{display:block}
     </div>
     <div class="panel rv" style="margin-top:18px">
       <span class="hud" style="color:var(--plum)">Mi historia</span>
-      <p class="copy" style="margin-top:8px">Esto no es solo un grado. Es cerrar cinco años de proyectos, entregas, renders, bugs y noches sin dormir. Y quiero cerrarlos con la gente que estuvo ahí. <b>Vos estás en la lista.</b></p>
+      <p class="copy" style="margin-top:8px">Esto no es solo un grado. Es cerrar cinco años de proyectos, entregas, renders, bugs y noches sin dormir. Y quiero cerrarlos con la gente que estuvo ahí. <b>Tú estás en la lista.</b></p>
     </div>
   </section>
 
@@ -324,7 +322,7 @@ body[data-state="menu"] .nav{display:block}
         </svg>
       </div>
       <div class="btns row2"><a class="pbtn sm" id="gmaps" target="_blank" rel="noopener">Maps</a><a class="pbtn sm ghost" id="waze" target="_blank" rel="noopener">Waze</a></div>
-      <p class="copy" style="margin-top:14px;font-size:14px">Hay parqueadero en la cuadra. Si te perdés, escribime.</p>
+      <p class="copy" style="margin-top:14px;font-size:14px">Hay parqueadero en la cuadra. Si te pierdes, escríbeme.</p>
     </div>
   </section>
 
@@ -334,8 +332,8 @@ body[data-state="menu"] .nav{display:block}
       <div class="spec">
         <div><span class="hud">Vestuario</span><span class="v">Elegante.<small>Como para foto. Sin corbata está bien.</small></span></div>
         <div><span class="hud">Hora</span><span class="v">7:00 pm, sin afán.<small>Termina cuando termine.</small></span></div>
-        <div><span class="hud">Regalo</span><span class="v">No es necesario.<small>Con que llegués, la misión se cumple.</small></span></div>
-        <div><span class="hud">Acompañante</span><span class="v">Bienvenido.<small>Contámelo al confirmar.</small></span></div>
+        <div><span class="hud">Regalo</span><span class="v">No es necesario.<small>Con que llegues, la misión se cumple.</small></span></div>
+        <div><span class="hud">Acompañante</span><span class="v">Bienvenido.<small>Cuéntamelo al confirmar.</small></span></div>
         <div><span class="hud">Habrá</span><span class="v">Comida, música, buena compañía y algunas sorpresas.</span></div>
       </div>
     </div>
@@ -344,10 +342,10 @@ body[data-state="menu"] .nav{display:block}
   <section class="sec" id="confirmar">
     <div class="sec-head rv"><span class="n">04</span><h2 class="out">¿Aceptás<br>la misión?</h2></div>
     <div class="panel rv">
-      <p class="hud" style="color:var(--plum)">Invitado <span class="pnum">1</span></p>
+      <p class="hud" style="color:var(--plum)">Invitados</p>
       <p class="px" style="font-size:30px;margin-top:6px" id="lobbyname">Invitado</p>
       <div class="btns"><a class="pbtn ok" id="rsvp-si" target="_blank" rel="noopener">✔ Sí, estaré ahí</a><a class="pbtn no" id="rsvp-no" target="_blank" rel="noopener">✖ No puedo asistir</a></div>
-      <p class="deadline">Confirmá antes del <b id="limite">10 de octubre</b>. Se abre WhatsApp con el mensaje listo.</p>
+      <p class="deadline">Confirma antes del <b id="limite">10 de octubre</b>. Se abre WhatsApp con el mensaje listo.</p>
       <div class="sub-links"><a id="ics" download="grado-michael.ics">Agregar al calendario</a><button id="share">Compartir</button></div>
     </div>
   </section>
@@ -359,7 +357,7 @@ body[data-state="menu"] .nav{display:block}
       <div><span>Producido por</span><b class="out">Mi familia</b></div>
       <div><span>Escuela</span><b class="out">Universidad Pontificia Bolivariana</b></div>
       <div><span>Título</span><b class="out">Ingeniero en Diseño de Entretenimiento Digital</b></div>
-      <div><span>Invitado <span class="pnum">1</span></span><b class="out" id="credname">Vos</b></div>
+      <div><span>Invitados</span><b class="out" id="credname">Tú</b></div>
       <div><span>Agradecimientos</span><b class="out">A quienes estuvieron en cada entrega</b></div>
       <div class="end"><span>Continuará</span><b class="out y">17 · 10 · 2026</b></div>
     </div></div>
@@ -395,11 +393,19 @@ const CFG={
   portrait:'assets/portrait.png',
 };
 const q=new URLSearchParams(location.search);
-const nombre=(q.get('n')||CFG.nombreDefault).trim();
+const nombres=(q.get('n')||CFG.nombreDefault).split(',').map(x=>x.trim()).filter(Boolean);
+const especiales=(q.get('e')||'').split(',').map(x=>x.trim()).filter(Boolean);
+const nombre=nombres[0]||'';
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=s=>document.querySelector(s);
-$('#pname').textContent=nombre||'Vos';$('#lobbyname').textContent=nombre||'Vos';
-const num=Math.max(1,parseInt(q.get('i')||'1',10)||1);const cupos=parseInt(q.get('c')||'',10)||null;document.querySelectorAll('#pnum,.pnum').forEach(e=>e.textContent=num);$('#credname').textContent=nombre||'Vos';$('#limite').textContent=CFG.limite;
+const num=Math.max(1,parseInt(q.get('i')||'1',10)||1);const cupos=parseInt(q.get('c')||'',10)||null;document.querySelectorAll('#pnum,.pnum').forEach(e=>e.textContent=num);
+// lista de invitados del grupo: Invitado 1: Tay / Invitado 2: Jhon / Invitado especial: Alana / Acompañantes: 3
+(function(){const gl=$('#guestlist');if(!gl)return;const lines=[];
+  const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;const solo=nombres.length<=1&&!especiales.length&&!extra;
+  if(nombres.length)nombres.forEach((n,i)=>lines.push([solo?'Invitado:':`Invitado ${i+1}:`,n,false]));else lines.push(['Invitado:','Tú',false]);
+  especiales.forEach(n=>lines.push(['Invitado especial:',n,true]));
+  if(extra>0)lines.push([extra===1?'Acompañante:':'Acompañantes:',String(extra),false]);
+  lines.forEach(([l,n,esp],i)=>{const d=document.createElement('div');if(esp)d.className='esp';d.style.animationDelay=(0.9+i*.18)+'s';d.innerHTML=`${l} <b>${n.replace(/</g,'&lt;')}</b>`;gl.appendChild(d)});})();$('#credname').textContent=nombre||'Tú';$('#limite').textContent=CFG.limite;
 
 const dirQ=encodeURIComponent(`${CFG.dir}, ${CFG.ciudad}`);
 $('#gmaps').href=`https://www.google.com/maps/search/?api=1&query=${dirQ}`;
@@ -589,9 +595,6 @@ requestAnimationFrame(loop);
   sw.addEventListener('pointerdown',e=>{if(wob)return;wob=true;sw.classList.add('wobble');beep(523,.08,'triangle',.03);
     const r=sw.getBoundingClientRect(),h=cv.getBoundingClientRect();burst(r.left+r.width/2-h.left,r.top+r.height*.6-h.top,14);
     setTimeout(()=>{sw.classList.remove('wobble');wob=false},520)});
-  // el nombre se escribe letra a letra
-  const pn=$('#pname'),full=pn.textContent;pn.textContent='';let k=0;
-  setTimeout(()=>{const iv=setInterval(()=>{k++;pn.textContent=full.slice(0,k);if(k%2===0)beep(1200,.015,'square',.01);if(k>=full.length)clearInterval(iv)},55)},1100);
 })();
 
 /* ============ ESTADOS ============ */
@@ -612,7 +615,7 @@ $('#s-boot').addEventListener('click',toTitle);
 
 /* cinemática */
 mapToCanvas($('#portrait'),HERO.idle);
-const lines=[nombre?`¡Hola, <em>${nombre}</em>!`:'¡Hola!','Después de años de proyectos, entregas, renders, bugs y noches sin dormir… llegó este gran momento.','Pero antes de la fiesta necesito tu ayuda con una última misión.'];
+const lines=[nombre?`¡Hola, <em>${nombres.join(' y ')}</em>!`:'¡Hola!','Después de años de proyectos, entregas, renders, bugs y noches sin dormir… llegó este gran momento.','Pero antes de la fiesta necesito tu ayuda con una última misión.'];
 let li=0,typing=null;
 function typeLine(){const el=$('#dlg');$('#next').classList.remove('on');const html=lines[li];const plain=html.replace(/<[^>]+>/g,'');
   if(reduce){el.innerHTML=html;$('#next').classList.add('on');return}
@@ -650,7 +653,7 @@ function tick(){const now=new Date(),diff=CFG.fecha-now;const p=Math.max(0,Math.
 function registrar(asiste){try{fetch(CFG.supabase+'/rest/v1/confirmaciones',{method:'POST',keepalive:true,headers:{'apikey':CFG.anon,'Authorization':'Bearer '+CFG.anon,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({invitado:num,nombre:nombre||null,asiste,cupos,agente:navigator.userAgent.slice(0,120)})}).catch(()=>{})}catch(e){}}
 $('#rsvp-si').addEventListener('click',()=>{registrar(true);unlock('rsvp','Misión aceptada');fanfare()});
 $('#rsvp-no').addEventListener('click',()=>{registrar(false)});
-$('#share').addEventListener('click',async()=>{const data={title:'La última misión · Maik Zapata',text:'Ayudá a Maik con su última misión. 17 de octubre.',url:location.href};try{if(navigator.share){await navigator.share(data)}else{await navigator.clipboard.writeText(location.href);toast('Listo','Enlace copiado')}}catch(e){}});
+$('#share').addEventListener('click',async()=>{const data={title:'La última misión · Maik Zapata',text:'Ayuda a Maik con su última misión. 17 de octubre.',url:location.href};try{if(navigator.share){await navigator.share(data)}else{await navigator.clipboard.writeText(location.href);toast('Listo','Enlace copiado')}}catch(e){}});
 $('#replay').addEventListener('click',()=>{$('#credits').classList.remove('on');void $('#credits').offsetWidth;$('#credits').classList.add('on')});
 
 /* logros */
