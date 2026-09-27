@@ -103,7 +103,14 @@ body[data-state="title"] #bg{display:none}
 .imgbtn:active,.imgbtn.pressed{background-image:url(assets/boton-presionado.png);transform:translateY(3px) scale(.98)}
 .title-bot .for{margin:0;display:flex;flex-direction:column;gap:2px;font-size:20px;line-height:1.15}
 .for div{opacity:0;transform:translateY(6px);animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards}
+.for div.esp{position:relative}
 .for div.esp b{color:#ff9fc4}
+.star{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin:0 6px;background:
+ linear-gradient(#ffd166,#ffd166) 5px 0/2px 12px no-repeat,
+ linear-gradient(#ffd166,#ffd166) 0 5px/12px 2px no-repeat,
+ linear-gradient(#fff7e6,#fff7e6) 4px 4px/4px 4px no-repeat;animation:tw 1.4s ease-in-out infinite;image-rendering:pixelated}
+.star.p{background:linear-gradient(#ff9fc4,#ff9fc4) 5px 0/2px 12px no-repeat,linear-gradient(#ff9fc4,#ff9fc4) 0 5px/12px 2px no-repeat,linear-gradient(#fff7e6,#fff7e6) 4px 4px/4px 4px no-repeat;animation-delay:.5s}
+.star.s{width:8px;height:8px;background:linear-gradient(#ffd166,#ffd166) 3px 0/2px 8px no-repeat,linear-gradient(#ffd166,#ffd166) 0 3px/8px 2px no-repeat;position:absolute;margin:0;animation-delay:.9s}
 .title-top{display:flex;justify-content:space-between;width:100%;color:var(--white)}
 .title-block{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:8px}
 h1.px{font-size:min(54px,13vw);line-height:.92;text-transform:uppercase}
@@ -405,7 +412,7 @@ const num=Math.max(1,parseInt(q.get('i')||'1',10)||1);const cupos=parseInt(q.get
   if(nombres.length)nombres.forEach((n,i)=>lines.push([solo?'Invitado:':`Invitado ${i+1}:`,n,false]));else lines.push(['Invitado:','Tú',false]);
   especiales.forEach(n=>lines.push(['Invitado especial:',n,true]));
   if(extra>0)lines.push([extra===1?'Acompañante:':'Acompañantes:',String(extra),false]);
-  lines.forEach(([l,n,esp],i)=>{const d=document.createElement('div');if(esp)d.className='esp';d.style.animationDelay=(0.9+i*.18)+'s';d.innerHTML=`${l} <b>${n.replace(/</g,'&lt;')}</b>`;gl.appendChild(d)});})();$('#credname').textContent=nombre||'Tú';$('#limite').textContent=CFG.limite;
+  lines.forEach(([l,n,esp],i)=>{const d=document.createElement('div');if(esp)d.className='esp';d.style.animationDelay=(0.9+i*.18)+'s';const nm=n.replace(/</g,'&lt;');d.innerHTML=esp?`<i class="star"></i>${l} <b>${nm}</b><i class="star p"></i><i class="star s" style="right:-2px;top:-8px"></i>`:`${l} <b>${nm}</b>`;gl.appendChild(d)});})();$('#credname').textContent=nombre||'Tú';$('#limite').textContent=CFG.limite;
 
 const dirQ=encodeURIComponent(`${CFG.dir}, ${CFG.ciudad}`);
 $('#gmaps').href=`https://www.google.com/maps/search/?api=1&query=${dirQ}`;
