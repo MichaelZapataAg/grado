@@ -101,7 +101,7 @@ body[data-state="title"] #bg{display:none}
 .title-bot{margin-top:10px;margin-bottom:auto;gap:10px}
 .imgbtn{width:192px;height:64px;background:url(assets/boton.png) no-repeat center/100% 100%;image-rendering:pixelated;display:block;transition:transform .12s cubic-bezier(.2,.8,.2,1)}
 .imgbtn:active,.imgbtn.pressed{background-image:url(assets/boton-presionado.png);transform:translateY(3px) scale(.98)}
-.title-bot .for{margin:0;display:flex;flex-direction:column;gap:2px;font-size:20px;line-height:1.15}
+.title-bot .for{margin:0;display:flex;flex-direction:column;gap:2px;font-size:20px;line-height:1.15;padding:10px 18px 9px;background:rgba(22,12,36,.62);border:2px solid var(--ink);box-shadow:0 4px 0 rgba(10,6,16,.55);clip-path:polygon(4px 0,calc(100% - 4px) 0,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0 calc(100% - 4px),0 4px);backdrop-filter:blur(2px);text-shadow:2px 0 var(--ink),-2px 0 var(--ink),0 2px var(--ink),0 -2px var(--ink),0 3px 0 var(--ink)}
 .for div{opacity:0;transform:translateY(6px);animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards}
 .for div.esp{position:relative}
 .for div.esp b{color:#ff9fc4}
@@ -400,26 +400,40 @@ const CFG={
   portrait:'assets/portrait.png',
 };
 const q=new URLSearchParams(location.search);
-const nombres=(q.get('n')||CFG.nombreDefault).split(',').map(x=>x.trim()).filter(Boolean);
-const especiales=(q.get('e')||'').split(',').map(x=>x.trim()).filter(Boolean);
-const nombre=nombres[0]||'';
+const per=x=>{const m=x.trim().match(/^(.*?)\s*[:(]\s*(f|m)\)?$/i);return m?[m[1].trim(),m[2].toLowerCase()]:[x.trim(),'m']};
+let nombres=(q.get('n')||CFG.nombreDefault).split(',').filter(x=>x.trim()).map(per);
+let especiales=(q.get('e')||'').split(',').filter(x=>x.trim()).map(per);
+let nombre=nombres[0]?nombres[0][0]:'';
+let num=Math.max(1,parseInt(q.get('i')||'1',10)||1);let cupos=parseInt(q.get('c')||'',10)||null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=s=>document.querySelector(s);
-const num=Math.max(1,parseInt(q.get('i')||'1',10)||1);const cupos=parseInt(q.get('c')||'',10)||null;document.querySelectorAll('#pnum,.pnum').forEach(e=>e.textContent=num);
-// lista de invitados del grupo: Invitado 1: Tay / Invitado 2: Jhon / Invitado especial: Alana / Acompañantes: 3
-(function(){const gl=$('#guestlist');if(!gl)return;const lines=[];
+$('#limite').textContent=CFG.limite;
+function aplicarInvitado(){
+  const solos=nombres.map(x=>x[0]);$('#lobbyname').textContent=solos.join(', ')||'Tú';$('#credname').textContent=solos.join(' · ')||'Tú';
+  document.querySelectorAll('#pnum,.pnum').forEach(e=>e.textContent=num);
+  const gl=$('#guestlist');gl.innerHTML='';const lines=[];
   const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;const solo=nombres.length<=1&&!especiales.length&&!extra;
-  if(nombres.length)nombres.forEach((n,i)=>lines.push([solo?'Invitado:':`Invitado ${i+1}:`,n,false]));else lines.push(['Invitado:','Tú',false]);
-  especiales.forEach(n=>lines.push(['Invitado especial:',n,true]));
+  const inv=g=>g==='f'?'Invitada':'Invitado';
+  if(nombres.length)nombres.forEach(([n,g],i)=>lines.push([solo?inv(g)+':':`${inv(g)} ${i+1}:`,n,false]));else lines.push(['Invitado:','Tú',false]);
+  especiales.forEach(([n,g])=>lines.push([inv(g)+' especial:',n,true]));
   if(extra>0)lines.push([extra===1?'Acompañante:':'Acompañantes:',String(extra),false]);
-  lines.forEach(([l,n,esp],i)=>{const d=document.createElement('div');if(esp)d.className='esp';d.style.animationDelay=(0.9+i*.18)+'s';const nm=n.replace(/</g,'&lt;');d.innerHTML=esp?`<i class="star"></i>${l} <b>${nm}</b><i class="star p"></i><i class="star s" style="right:-2px;top:-8px"></i>`:`${l} <b>${nm}</b>`;gl.appendChild(d)});})();$('#credname').textContent=nombre||'Tú';$('#limite').textContent=CFG.limite;
-
+  lines.forEach(([l,n,esp],i)=>{const d=document.createElement('div');if(esp)d.className='esp';d.style.animationDelay=(0.9+i*.18)+'s';const nm=n.replace(/</g,'&lt;');d.innerHTML=esp?`<i class="star"></i>${l} <b>${nm}</b><i class="star p"></i><i class="star s" style="right:-2px;top:-8px"></i>`:`${l} <b>${nm}</b>`;gl.appendChild(d)});
+  const quien=nombre?`soy ${nombre}. `:'';
+  $('#rsvp-si').href=`https://wa.me/${CFG.wa}?text=`+encodeURIComponent(`Hola Maik, ${quien}Acepto la misión: confirmo que voy a tu grado el 17 de octubre. Vamos: `);
+  $('#rsvp-no').href=`https://wa.me/${CFG.wa}?text=`+encodeURIComponent(`Hola Maik, ${quien}Esta vez no puedo ir a tu grado el 17 de octubre, pero te mando un abrazo enorme y felicitaciones.`);
+}
+aplicarInvitado();
+/* invitación por código: ?k=xxxxxx -> invitados.json cifrado (AES-GCM, llave = SHA-256 del código) */
+(async function(){const k=(q.get('k')||'').trim();if(!k||!crypto.subtle)return;
+  try{const enc=new TextEncoder();const id=[...new Uint8Array(await crypto.subtle.digest('SHA-256',enc.encode('id:'+k)))].map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,16);
+    const tabla=await (await fetch('invitados.json',{cache:'no-store'})).json();const b64=tabla[id];if(!b64)return;
+    const raw=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const key=await crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',enc.encode(k)),'AES-GCM',false,['decrypt']);
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:raw.slice(0,12)},key,raw.slice(12));const d=JSON.parse(new TextDecoder().decode(plain));
+    nombres=(d.n||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);especiales=(d.e||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);nombre=nombres[0]?nombres[0][0]:'';num=d.i||num;cupos=d.c||null;aplicarInvitado();}catch(e){console.error('invitación',e)}
+})();
 const dirQ=encodeURIComponent(`${CFG.dir}, ${CFG.ciudad}`);
 $('#gmaps').href=`https://www.google.com/maps/search/?api=1&query=${dirQ}`;
 $('#waze').href=`https://waze.com/ul?q=${dirQ}&navigate=yes`;
-const quien=nombre?`soy ${nombre}. `:'';
-$('#rsvp-si').href=`https://wa.me/${CFG.wa}?text=`+encodeURIComponent(`Hola Maik, ${quien}Acepto la misión: confirmo que voy a tu grado el 17 de octubre. Vamos: `);
-$('#rsvp-no').href=`https://wa.me/${CFG.wa}?text=`+encodeURIComponent(`Hola Maik, ${quien}Esta vez no puedo ir a tu grado el 17 de octubre, pero te mando un abrazo enorme y felicitaciones.`);
 const pad=n=>String(n).padStart(2,'0');
 const icsDate=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
 const finD=new Date(CFG.fecha.getTime()+5*3600e3);
@@ -622,7 +636,7 @@ $('#s-boot').addEventListener('click',toTitle);
 
 /* cinemática */
 mapToCanvas($('#portrait'),HERO.idle);
-const lines=[nombre?`¡Hola, <em>${nombres.join(' y ')}</em>!`:'¡Hola!','Después de años de proyectos, entregas, renders, bugs y noches sin dormir… llegó este gran momento.','Pero antes de la fiesta necesito tu ayuda con una última misión.'];
+let lines=[];const getLines=()=>[nombre?`¡Hola, <em>${nombres.map(x=>x[0]).join(' y ')}</em>!`:'¡Hola!','Después de años de proyectos, entregas, renders, bugs y noches sin dormir… llegó este gran momento.','Pero antes de la fiesta necesito tu ayuda con una última misión.'];
 let li=0,typing=null;
 function typeLine(){const el=$('#dlg');$('#next').classList.remove('on');const html=lines[li];const plain=html.replace(/<[^>]+>/g,'');
   if(reduce){el.innerHTML=html;$('#next').classList.add('on');return}
@@ -631,7 +645,7 @@ function typeLine(){const el=$('#dlg');$('#next').classList.remove('on');const h
     if(!inTag&&html.includes('<em>')&&!out.includes('</em>')&&out.includes('<em>'))out+='</em>';
     el.innerHTML=out;if(i%3===0)beep(1400,.015,'square',.012);
     if(i>=plain.length){clearInterval(typing);typing=null;el.innerHTML=html;$('#next').classList.add('on')}},26)}
-function startDialog(){li=0;typeLine()}
+function startDialog(){lines=getLines();li=0;typeLine()}
 function advance(){if(typing){clearInterval(typing);typing=null;$('#dlg').innerHTML=lines[li];$('#next').classList.add('on');return}beep(520,.05);li++;if(li>=lines.length){setState('game');return}typeLine()}
 $('#dialog').addEventListener('click',advance);$('#dnext').addEventListener('click',advance);
 $('#skip').addEventListener('click',()=>{if(typing){clearInterval(typing);typing=null}setState('game')});
