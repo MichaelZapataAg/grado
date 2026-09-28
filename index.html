@@ -200,17 +200,15 @@ body[data-state="win"] #bg{display:none}
 #winframe{z-index:1}
 #s-win>:not(.game-bg):not(#rays):not(#winframe){position:relative;z-index:2}
 #s-win .game-bg,#s-win #rays,#s-win #winframe{position:absolute}
-#placawrap{position:relative;width:min(400px,100%);margin-top:clamp(10px,4dvh,44px);transform-origin:50% 60%}
-#placa{display:block;width:100%;height:auto;image-rendering:auto}
-#placawrap .shine{position:absolute;inset:0;pointer-events:none;-webkit-mask-image:url(assets/placa.png?v=4);mask-image:url(assets/placa.png?v=4);-webkit-mask-size:100% 100%;mask-size:100% 100%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);background-size:300% 100%;background-position:120% 0;opacity:0}
-#placabg{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;display:block}
-#placa span{position:absolute;left:0;right:0;display:block}
-.pl-tag{top:27.5%;font-size:13px;letter-spacing:.06em;color:var(--ink)}
-.pl-l1{top:41%;font-size:23px;color:var(--white);text-shadow:2px 0 var(--ink),-2px 0 var(--ink),0 2px var(--ink),0 -2px var(--ink),2px 2px var(--ink),0 3px 0 var(--ink)}
-.pl-l2{top:53.5%;font-size:30px;color:var(--sun);text-shadow:2px 0 var(--ink),-2px 0 var(--ink),0 2px var(--ink),0 -2px var(--ink),2px 2px var(--ink),0 3px 0 var(--ink)}
-.pl-l3{top:68.5%;font-size:20px;letter-spacing:.01em;color:var(--sun);text-shadow:2px 0 var(--ink),-2px 0 var(--ink),0 2px var(--ink),0 -2px var(--ink),2px 2px var(--ink),0 3px 0 var(--ink)}
-.pl-year{top:84.5%;font-size:15px;letter-spacing:.08em;color:var(--ink)}
-@media(max-width:380px){.pl-l1{font-size:20px}.pl-l2{font-size:26px}.pl-l3{font-size:17px}}
+#placawrap{position:relative;width:min(398px,100%);margin-top:clamp(10px,4dvh,44px);transform-origin:50% 60%;container-type:inline-size}
+#placa{display:block;width:100%;height:auto;image-rendering:pixelated}
+.pl-text{position:absolute;left:11.6%;right:11.1%;top:37.9%;bottom:16.1%;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8cqw;text-align:center;font-family:var(--px);font-weight:700;text-transform:uppercase;line-height:1}
+.pl-text span{display:block;text-shadow:0 .5cqw 0 #1a1420}
+.pl-tag{font-family:var(--hud);font-weight:700;font-size:2.3cqw;letter-spacing:.14em;color:var(--cut-line);text-shadow:none!important;margin-bottom:.4cqw}
+.pl-a{font-size:4.2cqw;color:#f8e9c8}
+.pl-b{font-size:4.2cqw;color:#ffd166}
+.pl-year{position:absolute;left:30.7%;width:38.2%;top:85.1%;height:9.2%;z-index:2;display:flex;align-items:center;justify-content:center;font-family:var(--px);font-weight:700;font-size:3.2cqw;letter-spacing:.12em;padding-left:.12em;color:#241633;line-height:1}
+#placawrap .shine{position:absolute;inset:0;z-index:3;pointer-events:none;-webkit-mask-image:url(assets/placa.png?v=7);mask-image:url(assets/placa.png?v=7);-webkit-mask-size:100% 100%;mask-size:100% 100%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);background-size:300% 100%;background-position:120% 0;opacity:0}
 .win-hero{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:6px}
 #grad{height:420px;max-height:48dvh;width:auto;image-rendering:pixelated;display:block;transform-origin:50% 100%;position:relative;z-index:1}
 /* botón dorado tipo cápsula (misma pieza que el play del inicio) */
@@ -411,7 +409,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
   <div class="game-bg" aria-hidden="true"></div>
   <canvas id="rays" aria-hidden="true"></canvas>
   <canvas class="cut-frame" id="winframe" aria-hidden="true"></canvas>
-  <div id="placawrap"><img id="placa" src="assets/placa.png?v=4" alt="Logro desbloqueado: Ingeniero en Diseño de Entretenimiento Digital, 2026" draggable="false"><div class="shine" aria-hidden="true"></div></div>
+  <div id="placawrap"><div class="pl-text" aria-hidden="true"><span class="pl-tag">Logro desbloqueado</span><span class="pl-a">Ingeniero en</span><span class="pl-b">Diseño de</span><span class="pl-b">Entretenimiento Digital</span></div><span class="pl-year" aria-hidden="true">2026</span><img id="placa" src="assets/placa.png?v=7" alt="Logro desbloqueado: Ingeniero en Diseño de Entretenimiento Digital, 2026" draggable="false"><div class="shine" aria-hidden="true"></div></div>
   <div class="win-hero"><img id="grad" src="assets/graduado.png" alt="Maik graduado" draggable="false"></div>
   <div class="btnwrap" id="contwrap"><i class="btnglow" id="contglow" aria-hidden="true"></i><div class="gbtn" id="cont" role="button" tabindex="0"><canvas class="box9" width="140" height="32" aria-hidden="true"></canvas><span>Continuar ▶</span></div></div>
 </section>
@@ -507,8 +505,9 @@ const CFG={
   speak:'assets/speak.png?v=4',
   voz:'sans',                             // voz del diálogo (ver VOCES y voz.html): sans | sans2 | txt1 | papyrus | asgore | sintéticas
   musica:{vol:.11,src:'assets/musica.mp3?v=5',                                   // fase 1 (carga → logro): songGRados para todos
-    porGrupo:{Familia:'assets/musica-melibere.mp3?v=5',Nacional:'assets/musica-apelo.mp3?v=5',UPB:'assets/musica-apelo.mp3?v=5'}, // fase 2 (desde Continuar del logro): Me liberé / A pelo
+    porGrupo:{Familia:'assets/musica-telefono.mp3?v=6',Nacional:'assets/musica-apelo.mp3?v=5',UPB:'assets/musica-apelo.mp3?v=5'}, // fase 2 (desde Continuar del logro): Teléfono nuevo (desde 1:35) / A pelo
     porInvitado:{27:'assets/musica-mariana.mp3?v=5',32:'assets/musica-femboy.mp3?v=5',26:'assets/musica-miguel.mp3?v=5'}, // excepciones por Nº de invitado: 27 = Rojas → "Dónde estás Mariana"; 32 = Franco → "Femboy ven pa ca"
+    inicio:{'assets/musica-telefono.mp3?v=6':95},                           // segundo desde el que arranca la PRIMERA vez (las vueltas empiezan desde 0)
     fundido:1.6}, // canción de fondo en bucle por grupo del invitado (Familia / Nacional / UPB); src = la de respaldo               // Pj_Speaking: 4 frames de 112×128 en 2×2 (0 cerrada, 1 entreabierta, 2 cerrada, 3 abierta)
   cut:{fondo:'assets/cut-fondo.png?v=4',caja:'assets/cut-caja.png?v=4',flecha:'assets/cut-flecha.png?v=4'}, // ?v= fuerza recarga cuando cambia el arte (la caja vieja quedaba en caché en el iPhone) // piezas de la cinemática (caja y flecha dibujadas por Maik en Aseprite; si faltan se dibujan por código)
 };
@@ -665,8 +664,8 @@ function decodificar(t,cb){if(t.buf){cb&&cb(t);return}if(!t.data||t.decoding)ret
 function cancionFase2(){return (CFG.musica.porInvitado||{})[num]||(CFG.musica.porGrupo||{})[grupo]||null}
 function cargarMusica(){if(MUS.pedida)return;MUS.pedida=true;MUS.archivo=CFG.musica.src;pista(CFG.musica.src);
   const g=cancionFase2();if(g)pista(g);dbg('música fase 1: '+MUS.archivo+(g?' · fase 2: '+g:''))}
-function sonar(t,fade){const src=AC.createBufferSource();src.buffer=t.buf;src.loop=true;const g=AC.createGain();g.gain.setValueAtTime(0.0001,AC.currentTime);
-  g.gain.exponentialRampToValueAtTime(sndOn?CFG.musica.vol:0.0001,AC.currentTime+fade);src.connect(g).connect(AC.destination);src.start(0);t.node=src;t.gain=g;MUS.actual=t;MUS.gain=g}
+function sonar(t,fade){const src=AC.createBufferSource();src.buffer=t.buf;src.loop=true;src.loopStart=0;src.loopEnd=t.buf.duration;const off=Math.min((CFG.musica.inicio||{})[t.src]||0,t.buf.duration-1);const g=AC.createGain();g.gain.setValueAtTime(0.0001,AC.currentTime);
+  g.gain.exponentialRampToValueAtTime(sndOn?CFG.musica.vol:0.0001,AC.currentTime+fade);src.connect(g).connect(AC.destination);src.start(0,off);t.node=src;t.gain=g;MUS.actual=t;MUS.gain=g}
 function startMusic(){if(MUS.started||!AC||AC.state!=='running')return;const t=MUS.pistas[MUS.archivo];if(!t||!t.data)return;MUS.started=true;
   decodificar(t,tt=>sonar(tt,1.5));const g=cancionFase2();if(g&&MUS.pistas[g])decodificar(MUS.pistas[g])}
 function cambiarMusica(src){if(!AC||!src||MUS.archivo===src)return;const t=pista(src);MUS.archivo=src;
