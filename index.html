@@ -452,7 +452,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
     <div class="panel rv">
       <p class="hud" style="color:var(--plum)">Invitados</p>
       <p class="px" style="font-size:30px;margin-top:6px" id="lobbyname">Invitado</p>
-      <div class="btns" id="rsvp-btns"><button class="pbtn ok" id="rsvp-si" type="button">✔ Sí, estaré ahí</button><button class="pbtn no" id="rsvp-no" type="button">✖ No puedo asistir</button></div>
+      <div class="btns" id="rsvp-btns"><button class="pbtn ok" id="rsvp-si" type="button" data-sg="✔ Sí, estaré ahí" data-pl="✔ Sí, estaremos ahí">✔ Sí, estaré ahí</button><button class="pbtn no" id="rsvp-no" type="button" data-sg="✖ No puedo asistir" data-pl="✖ No podemos asistir">✖ No puedo asistir</button></div>
       <div class="rsvp-done" id="rsvp-done" hidden><p class="px" id="rsvp-title">¡Misión aceptada!</p><p class="copy" id="rsvp-copy">Quedó registrado. Te esperamos el 17 de octubre.</p><p class="hud" id="rsvp-state"></p><a class="pbtn sm ghost wa-btn" id="wa-btn" target="_blank" rel="noopener">Escribirle a Maik por WhatsApp</a><button class="linkbtn" id="rsvp-undo">Cambiar mi respuesta</button></div>
       <p class="deadline" id="deadline"><span data-sg="Confirma" data-pl="Confirmen">Confirma</span> antes del <b id="limite">10 de octubre</b>. Con un toque queda registrado.</p>
       <div class="sub-links"><a id="ics" download="grado-maik.ics">Agregar al calendario</a><a id="wa-link" target="_blank" rel="noopener">Hablar con Maik</a></div>
@@ -1227,7 +1227,7 @@ function pintarRsvp(asiste,estado){setTimeout(dressPanels,50);const d=$('#rsvp-d
   $('#rsvp-state').textContent=estado||''}
 function mostrarRsvpGuardado(){try{const v=localStorage.getItem(rsvpKey());if(v){pintarRsvp(v==='si',plural?'Ya respondieron. Pueden cambiarlo si algo pasa.':'Ya respondiste. Puedes cambiarlo si algo pasa.')}}catch(e){}}
 let enviando=false;
-async function registrar(asiste){if(enviando)return;enviando=true;const btn=asiste?$('#rsvp-si'):$('#rsvp-no');const txt=btn.textContent;btn.textContent='Guardando…';btn.disabled=true;
+async function registrar(asiste){if(enviando)return;enviando=true;const btn=asiste?$('#rsvp-si'):$('#rsvp-no');const txt=plural?btn.dataset.pl:btn.dataset.sg;btn.textContent='Guardando…';btn.disabled=true;
   let ok=false;try{const r=await fetch(CFG.supabase+'/rest/v1/confirmaciones',{method:'POST',headers:{'apikey':CFG.anon,'Authorization':'Bearer '+CFG.anon,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({invitado:num,nombre:nombre||null,asiste,cupos,agente:navigator.userAgent.slice(0,120)})});ok=r.ok}catch(e){}
   btn.textContent=txt;btn.disabled=false;enviando=false;
   if(ok){try{localStorage.setItem(rsvpKey(),asiste?'si':'no')}catch(e){}pintarRsvp(asiste,'');gsap.fromTo('#rsvp-done',{scale:.92,autoAlpha:0},{scale:1,autoAlpha:1,duration:.6,ease:'back.out(1.6)'});if(asiste){unlock('rsvp','Misión aceptada');fanfare();FXA.sparkle(innerWidth/2,innerHeight*.45,26)}}
