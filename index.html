@@ -694,8 +694,12 @@ function wakeAudio(){try{
   if(typeof VOCES!=='undefined'){const v=VOCES[vozId];if(v&&v.type==='sample')sampleOf(v)}
   if(AC.state==='running')startMusic();else AC.resume().then(startMusic).catch(e=>dbg('resume falló: '+e.message))}catch(e){dbg('wake error: '+e.message)}}
 ['touchstart','touchend','pointerdown','click','keydown'].forEach(ev=>addEventListener(ev,wakeAudio,{passive:true,capture:true}));
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&AC&&AC.state!=='running'){AC.resume();if(silentEl)silentEl.play().catch(()=>{})}});
-addEventListener('pageshow',()=>{if(AC&&AC.state!=='running')AC.resume()});
+// al salir de la pestaña, cerrar Safari o bloquear el teléfono: silencio total (el <audio> silencioso mantenía viva la sesión de sonido de iOS)
+function pausarAudio(){try{if(AC&&AC.state==='running')AC.suspend();if(silentEl)silentEl.pause()}catch(e){}}
+function reanudarAudio(){try{if(AC&&AC.state!=='running')AC.resume();if(silentEl&&unlocked)silentEl.play().catch(()=>{})}catch(e){}}
+document.addEventListener('visibilitychange',()=>{document.hidden?pausarAudio():reanudarAudio()});
+addEventListener('pagehide',pausarAudio);addEventListener('blur',()=>{if(document.hidden)pausarAudio()});
+addEventListener('pageshow',()=>{if(!document.hidden)reanudarAudio()});
 function beep(f=880,d=.07,type='square',g=.035){if(!sndOn)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();const o=AC.createOscillator(),v=AC.createGain();o.type=type;o.frequency.value=f;v.gain.setValueAtTime(g,AC.currentTime);v.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.connect(v).connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
 const jingle=()=>[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.12),i*90));
 /* voz de diálogo estilo Undertale. Perfiles en VOCES (tipos: osc, pulse, click, noise, glide, sample).
