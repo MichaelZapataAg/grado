@@ -619,6 +619,7 @@ function seccionLista(panel){const sec=panel.closest('.sec');if(!sec||panel.data
 function punch(t,vars={}){return gsap.fromTo(t,{scale:vars.from||1.35,rotation:vars.rot||0},{scale:1,rotation:0,duration:vars.dur||.6,ease:vars.ease||'elastic.out(1,.45)',overwrite:'auto'})}
 $('#limite').textContent=CFG.limite;
 let plural=false;
+const unirNombres=a=>a.length<2?(a[0]||''):a.slice(0,-1).join(', ')+' y '+a[a.length-1];   // "Nana, El Gato y Marta"
 function aplicarPlural(){const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;plural=familia||(nombres.length+especiales.length+extra)>1;document.querySelectorAll('[data-sg]').forEach(e=>{e.textContent=plural?e.dataset.pl:e.dataset.sg})}
 function aplicarInvitado(){aplicarPlural();
   const solos=nombres.map(x=>x[0]);const etiqueta=familia?`${solos[0]||'Tú'} y ${familia}`:(solos.length>1?solos.slice(0,-1).join(', ')+' y '+solos[solos.length-1]:(solos[0]||'Tú'));$('#lobbyname').textContent=etiqueta;$('#credname').textContent=etiqueta;
@@ -1144,7 +1145,7 @@ function toTitle(){clearInterval(bootT);clearTimeout(bootEnd);DIP.done=true;if(d
 $('#s-boot').addEventListener('click',toTitle);
 
 /* cinemática */
-let lines=[];const getLines=()=>[nombre?`¡Hola, <em>${familia?nombres[0][0]+' y '+familia:nombres.map(x=>x[0]).join(' y ')}</em>!`:'¡Hola!',(plural?'¿Adivinen qué?':'¿Adivina qué?'),'Sí, por fin. Me gradúo.',(plural?'Pero antes de la fiesta necesito su ayuda con una última misión: hay tres cosas que sacar de un bloque.':'Pero antes de la fiesta necesito tu ayuda con una última misión: hay tres cosas que sacar de un bloque.')];
+let lines=[];const getLines=()=>[nombre?`¡Hola, <em>${familia?nombres[0][0]+' y '+familia:unirNombres(nombres.map(x=>x[0]))}</em>!`:'¡Hola!',(plural?'¿Adivinen qué?':'¿Adivina qué?'),'Sí, por fin. Me gradúo.',(plural?'Pero antes de la fiesta necesito su ayuda con una última misión: hay tres cosas que sacar de un bloque.':'Pero antes de la fiesta necesito tu ayuda con una última misión: hay tres cosas que sacar de un bloque.')];
 let li=0,typing=null;
 function buildLine(html){const el=$('#dlg');el.innerHTML='';const chars=[],ems=[];
   const parts=html.split(/(<em>.*?<\/em>)/g).filter(Boolean);
@@ -1222,7 +1223,7 @@ function tick(){const now=new Date(),diff=CFG.fecha-now;const p=Math.max(0,Math.
 function rsvpKey(){return 'rsvp:'+(q.get('k')||('n'+num))}
 function pintarRsvp(asiste,estado){setTimeout(dressPanels,50);const d=$('#rsvp-done');d.hidden=false;d.classList.toggle('no',!asiste);$('#rsvp-btns').hidden=true;$('#deadline').hidden=true;
   $('#rsvp-title').textContent=asiste?'¡Misión aceptada!':'Gracias por avisar';
-  const solos=nombres.map(x=>x[0]).join(' y ')||'Tú';
+  const solos=(familia&&nombres.length?nombres[0][0]+' y '+familia:unirNombres(nombres.map(x=>x[0])))||'Tú';
   $('#rsvp-copy').textContent=asiste?`${solos}: quedó registrado. ${plural?'Los esperamos':'Te esperamos'} el 17 de octubre a las 7:00 pm.`:`${solos}: quedó registrado. ${plural?'Los vamos a extrañar':'Te vamos a extrañar'}, gracias por avisar.`;
   $('#rsvp-state').textContent=estado||''}
 function mostrarRsvpGuardado(){try{const v=localStorage.getItem(rsvpKey());if(v){pintarRsvp(v==='si',plural?'Ya respondieron. Pueden cambiarlo si algo pasa.':'Ya respondiste. Puedes cambiarlo si algo pasa.')}}catch(e){}}
