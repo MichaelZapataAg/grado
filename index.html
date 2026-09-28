@@ -15,19 +15,19 @@
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="https://michaelzapataag.github.io/grado/">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="assets/fonts/PixelifySans-Regular-maik.ttf?v=3" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="assets/fonts/PixelifySans-Medium-maik.ttf?v=3" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="assets/fonts/PixelifySans-SemiBold-maik.ttf?v=3" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="assets/fonts/PixelifySans-Bold-maik.ttf?v=3" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Regular-maik.woff2?v=3" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Medium-maik.woff2?v=3" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-SemiBold-maik.woff2?v=3" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Bold-maik.woff2?v=3" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* Pixelify Sans con la H corregida (sin el diente sobre la barra); pesos estáticos parchados con fontTools */
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Regular-maik.ttf?v=3") format("truetype");font-weight:400;font-display:block}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Medium-maik.ttf?v=3") format("truetype");font-weight:500;font-display:block}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-SemiBold-maik.ttf?v=3") format("truetype");font-weight:600;font-display:block}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Bold-maik.ttf?v=3") format("truetype");font-weight:700;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Regular-maik.woff2?v=3") format("woff2"),url("assets/fonts/PixelifySans-Regular-maik.ttf?v=3") format("truetype");font-weight:400;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Medium-maik.woff2?v=3") format("woff2"),url("assets/fonts/PixelifySans-Medium-maik.ttf?v=3") format("truetype");font-weight:500;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-SemiBold-maik.woff2?v=3") format("woff2"),url("assets/fonts/PixelifySans-SemiBold-maik.ttf?v=3") format("truetype");font-weight:600;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Bold-maik.woff2?v=3") format("woff2"),url("assets/fonts/PixelifySans-Bold-maik.ttf?v=3") format("truetype");font-weight:700;font-display:block}
 :root{
   --ink:#241633;--ink2:#3a2450;--cream:#f8e9c8;--cream2:#e9d2a0;--sun:#ffd166;--sun2:#ffb347;
   --coral:#f08a4b;--rose:#d8624f;--plum:#7a2f63;--night:#1a1033;--teal:#7fd1c8;--ok:#5cb85c;--ok2:#3e8f3e;--no:#e5484d;--no2:#a8262b;
@@ -311,6 +311,11 @@ body[data-state="menu"] .nav{display:block}
 .wipe{position:fixed;inset:-2px 0;z-index:8;background:var(--ink);transform:scaleY(0);transform-origin:50% 100%;pointer-events:none;border-top:4px solid var(--sun);border-bottom:4px solid var(--sun)}
 .wipe.busy{pointer-events:auto}
 /* ===== pantalla final (menú) con la estética de la cinemática ===== */
+#scrollhint{position:fixed;left:0;right:0;bottom:max(18px,env(safe-area-inset-bottom));z-index:5;display:none;flex-direction:column;align-items:center;gap:6px;pointer-events:none;opacity:0}
+body[data-state="menu"] #scrollhint{display:flex}
+#scrollhint span{font-family:var(--px);font-weight:600;font-size:14px;letter-spacing:.06em;color:var(--cut-line);text-shadow:1px 1px 0 #1a1420}
+#scrollhint canvas{width:32px;height:16px;image-rendering:pixelated}
+#scrollhint::before{content:"";position:absolute;left:0;right:0;bottom:calc(-1*max(18px,env(safe-area-inset-bottom)));height:110px;background:linear-gradient(transparent,rgba(20,16,42,.85));z-index:-1}
 body[data-state="menu"]{background:var(--cut-bg)}
 body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
 .menu-bg{position:fixed;inset:0;z-index:0;background:var(--cut-bg) url(assets/cut-fondo.png?v=4) center bottom/430px auto no-repeat;image-rendering:pixelated}
@@ -415,6 +420,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
 </section>
 
 <!-- MENU -->
+<div id="scrollhint" aria-hidden="true"><span>Desliza</span><canvas width="24" height="12"></canvas></div>
 <main id="menu">
   <div class="menu-bg" aria-hidden="true"></div>
 
@@ -457,7 +463,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
     <div class="sec-head rv"><span class="n">04</span><h2 class="out">Regalos</h2></div>
     <div class="panel rv regalos">
       <p class="copy" id="regalo-copy" data-sg="Tu presencia es el mejor regalo… pero seamos sinceros, las deudas no se pagan con abrazos jajaja. Si quieres hacerme un regalito, aquí está el QR:" data-pl="Su presencia es el mejor regalo… pero seamos sinceros, las deudas no se pagan con abrazos jajaja. Si quieren hacerme un regalito, aquí está el QR:">Tu presencia es el mejor regalo… pero seamos sinceros, las deudas no se pagan con abrazos jajaja. Si quieres hacerme un regalito, aquí está el QR:</p>
-      <div class="qrbox"><img src="assets/qr-breb.png?v=5" alt="QR de Bre-B Bancolombia para transferir a Maik" draggable="false"></div>
+      <div class="qrbox"><img src="assets/qr-breb.png?v=7" alt="QR de Bre-B Bancolombia para transferir a Maik" draggable="false"></div>
       <div class="cuenta">
         <div><span class="hud">Llave Bre-B</span><b class="px" id="llave">1000893745</b><button class="copiar" data-copy="1000893745">Copiar</button></div>
         <div><span class="hud">Ahorros Bancolombia</span><b class="px" id="cta">551-62929-720</b><button class="copiar" data-copy="55162929720">Copiar</button></div>
@@ -504,10 +510,10 @@ const CFG={
   portrait:'assets/portrait.png?v=4',
   speak:'assets/speak.png?v=4',
   voz:'sans',                             // voz del diálogo (ver VOCES y voz.html): sans | sans2 | txt1 | papyrus | asgore | sintéticas
-  musica:{vol:.11,src:'assets/musica.mp3?v=5',                                   // fase 1 (carga → logro): songGRados para todos
-    porGrupo:{Familia:'assets/musica-telefono.mp3?v=6',Nacional:'assets/musica-apelo.mp3?v=5',UPB:'assets/musica-apelo.mp3?v=5'}, // fase 2 (desde Continuar del logro): Teléfono nuevo (desde 1:35) / A pelo
-    porInvitado:{27:'assets/musica-mariana.mp3?v=5',32:'assets/musica-femboy.mp3?v=5',26:'assets/musica-miguel.mp3?v=5'}, // excepciones por Nº de invitado: 27 = Rojas → "Dónde estás Mariana"; 32 = Franco → "Femboy ven pa ca"
-    inicio:{'assets/musica-telefono.mp3?v=6':95},                           // segundo desde el que arranca la PRIMERA vez (las vueltas empiezan desde 0)
+  musica:{vol:.11,src:'assets/musica.mp3?v=7',                                   // fase 1 (carga → logro): songGRados para todos
+    porGrupo:{Familia:'assets/musica-telefono.mp3?v=7',Nacional:'assets/musica-apelo.mp3?v=7',UPB:'assets/musica-apelo.mp3?v=7'}, // fase 2 (desde Continuar del logro): Teléfono nuevo (desde 1:35) / A pelo
+    porInvitado:{27:'assets/musica-mariana.mp3?v=7',32:'assets/musica-femboy.mp3?v=7',26:'assets/musica-miguel.mp3?v=7'}, // excepciones por Nº de invitado: 27 = Rojas → "Dónde estás Mariana"; 32 = Franco → "Femboy ven pa ca"
+    inicio:{'assets/musica-telefono.mp3?v=7':95},                           // segundo desde el que arranca la PRIMERA vez (las vueltas empiezan desde 0)
     fundido:1.6}, // canción de fondo en bucle por grupo del invitado (Familia / Nacional / UPB); src = la de respaldo               // Pj_Speaking: 4 frames de 112×128 en 2×2 (0 cerrada, 1 entreabierta, 2 cerrada, 3 abierta)
   cut:{fondo:'assets/cut-fondo.png?v=4',caja:'assets/cut-caja.png?v=4',flecha:'assets/cut-flecha.png?v=4'}, // ?v= fuerza recarga cuando cambia el arte (la caja vieja quedaba en caché en el iPhone) // piezas de la cinemática (caja y flecha dibujadas por Maik en Aseprite; si faltan se dibujan por código)
 };
@@ -516,7 +522,7 @@ const per=x=>{const m=x.trim().match(/^(.*?)\s*[:(]\s*(f|m)\)?$/i);return m?[m[1
 let nombres=(q.get('n')||CFG.nombreDefault).split(',').filter(x=>x.trim()).map(per);
 let especiales=(q.get('e')||'').split(',').filter(x=>x.trim()).map(per);
 let nombre=nombres[0]?nombres[0][0]:'';
-let num=Math.max(1,parseInt(q.get('i')||'1',10)||1);let cupos=parseInt(q.get('c')||'',10)||null;let grupo=q.get('g')||'';let familia=q.get('f')==='1';
+let num=Math.max(1,parseInt(q.get('i')||'1',10)||1);let cupos=parseInt(q.get('c')||'',10)||null;let grupo=q.get('g')||'';let familia=q.get('f')==='1'?'familia':(q.get('f')||false);
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=s=>document.querySelector(s);
 /* ============ MOTION (GSAP): entradas fluidas, nada de steps() ============ */
@@ -615,12 +621,12 @@ $('#limite').textContent=CFG.limite;
 let plural=false;
 function aplicarPlural(){const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;plural=familia||(nombres.length+especiales.length+extra)>1;document.querySelectorAll('[data-sg]').forEach(e=>{e.textContent=plural?e.dataset.pl:e.dataset.sg})}
 function aplicarInvitado(){aplicarPlural();
-  const solos=nombres.map(x=>x[0]);const etiqueta=familia?`${solos[0]||'Tú'} y familia`:(solos.length>1?solos.slice(0,-1).join(', ')+' y '+solos[solos.length-1]:(solos[0]||'Tú'));$('#lobbyname').textContent=etiqueta;$('#credname').textContent=etiqueta;
+  const solos=nombres.map(x=>x[0]);const etiqueta=familia?`${solos[0]||'Tú'} y ${familia}`:(solos.length>1?solos.slice(0,-1).join(', ')+' y '+solos[solos.length-1]:(solos[0]||'Tú'));$('#lobbyname').textContent=etiqueta;$('#credname').textContent=etiqueta;
   document.querySelectorAll('#pnum,.pnum').forEach(e=>e.textContent=num);
   const gl=$('#guestlist');gl.innerHTML='';const lines=[];
   const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;const solo=nombres.length<=1&&!especiales.length&&!extra;
   const inv=g=>g==='f'?'Invitada':'Invitado';
-  if(familia&&nombres.length)lines.push(['Invitados:',`${nombres[0][0]} y familia`,false]);
+  if(familia&&nombres.length)lines.push(['Invitados:',`${nombres[0][0]} y ${familia}`,false]);
   else if(nombres.length)nombres.forEach(([n,g])=>lines.push([inv(g)+':',n,false]));else lines.push(['Invitado:','Tú',false]);   // sin numerar: "Invitada: Tay", "Invitado: Papá de Alana"
   especiales.forEach(([n,g])=>lines.push([inv(g)+' especial:',n,true]));
   if(extra>0&&!familia)lines.push([extra===1?'Acompañante:':'Acompañantes:',String(extra),false]);
@@ -637,7 +643,7 @@ aplicarInvitado();
     const tabla=await (await fetch('invitados.json',{cache:'no-store'})).json();const b64=tabla[id];if(!b64)return;
     const raw=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const key=await crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',enc.encode(k)),'AES-GCM',false,['decrypt']);
     const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:raw.slice(0,12)},key,raw.slice(12));const d=JSON.parse(new TextDecoder().decode(plain));
-    nombres=(d.n||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);especiales=(d.e||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);nombre=nombres[0]?nombres[0][0]:'';num=d.i||num;cupos=d.c||null;grupo=d.g||grupo;familia=!!d.f;aplicarInvitado();}catch(e){console.error('invitación',e)}
+    nombres=(d.n||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);especiales=(d.e||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);nombre=nombres[0]?nombres[0][0]:'';num=d.i||num;cupos=d.c||null;grupo=d.g||grupo;familia=d.f===true?'familia':(d.f||false);aplicarInvitado();}catch(e){console.error('invitación',e)}
   finally{cargarMusica()}
 })();
 if(!(q.get('k')||'').trim())setTimeout(()=>cargarMusica(),0);   // sin código: canción por ?g= o la de respaldo (diferido: MUS se define más abajo)
@@ -660,19 +666,20 @@ if(DBG)setInterval(()=>dbg('t '+Math.round(performance.now()/1000)+'s'),2000);
 const MUS={pistas:{},actual:null,gain:null,started:false,pedida:false,archivo:''};
 function pista(src){if(MUS.pistas[src])return MUS.pistas[src];const t={src,data:null,buf:null,node:null,gain:null};MUS.pistas[src]=t;
   fetch(src).then(r=>r.arrayBuffer()).then(b=>{t.data=b;if(AC&&AC.state==='running')decodificar(t)}).catch(e=>dbg('no cargó '+src));return t}
-function decodificar(t,cb){if(t.buf){cb&&cb(t);return}if(!t.data||t.decoding)return;t.decoding=true;AC.decodeAudioData(t.data.slice(0)).then(buf=>{t.buf=buf;t.decoding=false;dbg('lista '+t.src.split('/').pop()+' '+buf.duration.toFixed(0)+'s');cb&&cb(t)}).catch(e=>{t.decoding=false;dbg('falló '+t.src)})}
+function decodificar(t,cb){if(t.buf){cb&&cb(t);return}t.cbs=t.cbs||[];if(cb)t.cbs.push(cb);if(!t.data||t.decoding)return;t.decoding=true;AC.decodeAudioData(t.data.slice(0)).then(buf=>{t.buf=buf;t.decoding=false;dbg('lista '+t.src.split('/').pop()+' '+buf.duration.toFixed(0)+'s');const q=t.cbs;t.cbs=[];q.forEach(f=>f(t))}).catch(e=>{t.decoding=false;dbg('falló '+t.src)})}   // los callbacks se encolan: nadie se queda esperando
 function cancionFase2(){return (CFG.musica.porInvitado||{})[num]||(CFG.musica.porGrupo||{})[grupo]||null}
+function precargarFase2(){const g=cancionFase2();if(g)pista(g)}
 function cargarMusica(){if(MUS.pedida)return;MUS.pedida=true;MUS.archivo=CFG.musica.src;pista(CFG.musica.src);
-  const g=cancionFase2();if(g)pista(g);dbg('música fase 1: '+MUS.archivo+(g?' · fase 2: '+g:''))}
+  const g=cancionFase2();dbg('música fase 1: '+MUS.archivo+(g?' · fase 2: '+g:''))}
 function sonar(t,fade){const src=AC.createBufferSource();src.buffer=t.buf;src.loop=true;src.loopStart=0;src.loopEnd=t.buf.duration;const off=Math.min((CFG.musica.inicio||{})[t.src]||0,t.buf.duration-1);const g=AC.createGain();g.gain.setValueAtTime(0.0001,AC.currentTime);
   g.gain.exponentialRampToValueAtTime(sndOn?CFG.musica.vol:0.0001,AC.currentTime+fade);src.connect(g).connect(AC.destination);src.start(0,off);t.node=src;t.gain=g;MUS.actual=t;MUS.gain=g}
 function startMusic(){if(MUS.started||!AC||AC.state!=='running')return;const t=MUS.pistas[MUS.archivo];if(!t||!t.data)return;MUS.started=true;
-  decodificar(t,tt=>sonar(tt,1.5));const g=cancionFase2();if(g&&MUS.pistas[g])decodificar(MUS.pistas[g])}
+  decodificar(t,tt=>sonar(tt,1.5))}
 function cambiarMusica(src){if(!AC||!src||MUS.archivo===src)return;const t=pista(src);MUS.archivo=src;
   const go=tt=>{const viejo=MUS.actual;const f=CFG.musica.fundido||1.5;
     if(viejo&&viejo.gain){viejo.gain.gain.cancelScheduledValues(AC.currentTime);viejo.gain.gain.setValueAtTime(Math.max(viejo.gain.gain.value,0.0001),AC.currentTime);viejo.gain.gain.exponentialRampToValueAtTime(0.0001,AC.currentTime+f);setTimeout(()=>{try{viejo.node.stop()}catch(e){}},f*1000+50)}
     sonar(tt,f);dbg('ahora suena '+src.split('/').pop())};
-  if(t.buf)go(t);else if(t.data)decodificar(t,go);else{const iv=setInterval(()=>{if(t.data){clearInterval(iv);decodificar(t,go)}},200)}}
+  decodificar(t,go);if(!t.data){const iv=setInterval(()=>{if(t.data){clearInterval(iv);decodificar(t)}},200)}}
 function musicVolume(on){if(MUS.gain){MUS.gain.gain.cancelScheduledValues(AC.currentTime);MUS.gain.gain.setTargetAtTime(on?CFG.musica.vol:0.0001,AC.currentTime,.25)}}
 function wakeAudio(){try{
   AC=AC||new (window.AudioContext||window.webkitAudioContext)();
@@ -710,7 +717,7 @@ const VOCES={
 };
 let vozId=q.get('voz')||CFG.voz||'sans';let noiseBuf=null,sampleBuf=null;
 /* muestras: se bajan de una vez y se decodifican cuando exista el AudioContext (tras el primer toque) */
-Object.values(VOCES).forEach(v=>{if(v.type==='sample'&&v.src)fetch(v.src).then(r=>r.arrayBuffer()).then(b=>{v.data=b}).catch(()=>{})});
+[VOCES[vozId]].forEach(v=>{if(v&&v.type==='sample'&&v.src)fetch(v.src).then(r=>r.arrayBuffer()).then(b=>{v.data=b}).catch(()=>{})});
 function sampleOf(v){if(v.buf)return v.buf;if(v===VOCES.muestra)return sampleBuf;if(v.data&&!v.decoding){v.decoding=true;AC.decodeAudioData(v.data.slice(0)).then(b=>{v.buf=b})}return null}
 function noise(){if(noiseBuf)return noiseBuf;const n=AC.sampleRate*.12,b=AC.createBuffer(1,n,AC.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;return noiseBuf=b}
 function env(g,t,peak,dur,hold=.3){g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+.003);g.gain.setValueAtTime(peak,t+dur*hold);g.gain.exponentialRampToValueAtTime(.0001,t+dur)}
@@ -1090,6 +1097,7 @@ requestAnimationFrame(loop);
 function setState(s){
   document.body.dataset.state=s;
   if(FX[s])FX[s]();
+  if(s==='game'||s==='win')precargarFase2();   // la canción del grupo se baja mientras juega
   if(s==='title'){const c=document.getElementById('fxtitle');if(c){c.width=c.clientWidth/2|0;c.height=c.clientHeight/2|0}}
   if(s==='cut')startDialog();
   if(s==='game')startGame();
@@ -1132,7 +1140,7 @@ function toTitle(){clearInterval(bootT);clearTimeout(bootEnd);DIP.done=true;if(d
 $('#s-boot').addEventListener('click',toTitle);
 
 /* cinemática */
-let lines=[];const getLines=()=>[nombre?`¡Hola, <em>${familia?nombres[0][0]+' y familia':nombres.map(x=>x[0]).join(' y ')}</em>!`:'¡Hola!',(plural?'¿Adivinen qué?':'¿Adivina qué?'),'Sí, por fin. Me gradúo.',(plural?'Pero antes de la fiesta necesito su ayuda con una última misión: hay tres cosas que sacar de un bloque.':'Pero antes de la fiesta necesito tu ayuda con una última misión: hay tres cosas que sacar de un bloque.')];
+let lines=[];const getLines=()=>[nombre?`¡Hola, <em>${familia?nombres[0][0]+' y '+familia:nombres.map(x=>x[0]).join(' y ')}</em>!`:'¡Hola!',(plural?'¿Adivinen qué?':'¿Adivina qué?'),'Sí, por fin. Me gradúo.',(plural?'Pero antes de la fiesta necesito su ayuda con una última misión: hay tres cosas que sacar de un bloque.':'Pero antes de la fiesta necesito tu ayuda con una última misión: hay tres cosas que sacar de un bloque.')];
 let li=0,typing=null;
 function buildLine(html){const el=$('#dlg');el.innerHTML='';const chars=[],ems=[];
   const parts=html.split(/(<em>.*?<\/em>)/g).filter(Boolean);
@@ -1182,8 +1190,14 @@ function dressPanels(){document.querySelectorAll('#menu .panel').forEach(pn=>{le
   const W=Math.round(pn.clientWidth/SCALE),H=Math.round(pn.clientHeight/SCALE);if(cutImgs.caja)nineSlice(c,cutImgs.caja,W,H,9);else pixelBox(c,W,H,{shadow:true})})}
 addEventListener('resize',()=>{if(document.body.dataset.state==='menu')dressPanels()});
 const panelRO=new ResizeObserver(()=>{if(document.body.dataset.state==='menu')dressPanels()});document.querySelectorAll('#menu .panel').forEach(pn=>panelRO.observe(pn));
+function scrollHint(){const h=$('#scrollhint'),cv=h.querySelector('canvas');const f=cutImgs.flecha;if(f){cv.width=f.width;cv.height=f.height;cv.getContext('2d').drawImage(f,0,0)}else pixelArrow(cv);
+  let visible=false,bote=null;
+  const mostrar=()=>{if(visible)return;visible=true;gsap.to(h,{opacity:1,duration:.5});if(!reduce&&!bote)bote=gsap.to(cv,{y:6,duration:.55,yoyo:true,repeat:-1,ease:'sine.inOut'})};
+  const ocultar=()=>{if(!visible)return;visible=false;gsap.to(h,{opacity:0,duration:.35})};
+  setTimeout(()=>{if(scrollY<40)mostrar()},1200);
+  addEventListener('scroll',()=>{const alFinal=innerHeight+scrollY>=document.documentElement.scrollHeight-80;if(scrollY>60||alFinal)ocultar();else if(scrollY<10)mostrar()},{passive:true})}
 function startMenu(){
-  if(menuStarted)return;menuStarted=true;dressPanels();
+  if(menuStarted)return;menuStarted=true;dressPanels();scrollHint();
   document.querySelectorAll('.nav canvas').forEach(c=>mapToCanvas(c,ICONS[c.dataset.ico]));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){reveal(e.target);io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px 12% 0px'});   // se revela un poco antes de asomar, para que no parezca que aparece de golpe
   document.querySelectorAll('#menu .rv').forEach(el=>io.observe(el));
