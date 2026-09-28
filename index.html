@@ -237,7 +237,7 @@ body[data-state="win"] #bg{display:none}
 .date .d b{color:var(--ink);font-size:11px}
 .date .d b.hora{display:block;font-family:var(--px);font-size:30px;line-height:1;margin-top:6px;color:var(--sun);letter-spacing:0}
 .load{margin-top:18px}
-.load .row{display:flex;justify-content:space-between;font-family:var(--hud);font-size:9px;color:var(--ink2)}
+.load .row{display:flex;justify-content:space-between;font-family:var(--hud);font-size:13px;letter-spacing:.08em;color:var(--ink2)}
 .load .track{margin-top:6px;height:18px;border:3px solid var(--ink);padding:2px;background:var(--cream2);display:grid;grid-template-columns:repeat(20,1fr);gap:2px}
 .load .track i{background:transparent}
 .load .track i.on{background:var(--sun2)}
@@ -429,7 +429,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
     </div>
     <div class="panel rv" style="margin-top:18px">
       <span class="hud" style="color:var(--plum)">Mi historia</span>
-      <p class="copy" style="margin-top:8px">Esto no es solo un grado. Es cerrar cuatro años de proyectos, entregas, renders, bugs y noches sin dormir. Y me encantaría cerrarlos con la gente que quiero. <b data-sg="Tú estás en la lista." data-pl="Ustedes están en la lista.">Tú estás en la lista.</b></p>
+      <p class="copy" style="margin-top:8px">Esto no es solo un grado. Es cerrar cuatro años de proyectos, entregas, alegrías, tristezas y noches sin dormir. Y me encantaría cerrarlos con la gente que quiero. <b data-sg="Tú estás en la lista." data-pl="Ustedes están en la lista.">Tú estás en la lista.</b></p>
     </div>
   </section>
 
@@ -501,7 +501,7 @@ const CFG={
   inicio:new Date(2026,8,1,0,0,0),
   limite:'10 de octubre',
   dir:'Calle 107 #86-76',ciudad:'Medellín',barrio:'El Triunfo, Doce de Octubre',
-  lat:6.3090968,lng:-75.5845471,mapsUrl:'https://maps.app.goo.gl/wcXk2NduQgruTabT7',wazeUrl:'https://ul.waze.com/ul?from=place.ChIJiZkNPd0uRI4R7JZytKTjuRg&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location',   // pin exacto de la casa (enlace de Maik, 2026-09-27)
+  lat:6.3090968,lng:-75.5845471,mapsUrl:'https://maps.app.goo.gl/wcXk2NduQgruTabT7',placeId:'ChIJiZkNPd0uRI4R7JZytKTjuRg',   // id de Google del lugar (sale del enlace de Waze de Maik)   // pin exacto de la casa (enlace de Maik, 2026-09-27)
   url:location.origin+location.pathname,
   portrait:'assets/portrait.png?v=4',
   speak:'assets/speak.png?v=4',
@@ -643,8 +643,10 @@ aplicarInvitado();
 })();
 if(!(q.get('k')||'').trim())setTimeout(()=>cargarMusica(),0);   // sin código: canción por ?g= o la de respaldo (diferido: MUS se define más abajo)
 const dirQ=encodeURIComponent(`${CFG.dir}, ${CFG.ciudad}`);
-$('#gmaps').href=CFG.mapsUrl||`https://www.google.com/maps/search/?api=1&query=${CFG.lat},${CFG.lng}`;
-$('#waze').href=CFG.wazeUrl||`https://waze.com/ul?ll=${CFG.lat},${CFG.lng}&navigate=yes&zoom=17`;
+// Maps: ruta con destino fijado por coordenadas + id del lugar (no depende de búsquedas por texto)
+$('#gmaps').href=`https://www.google.com/maps/dir/?api=1&destination=${CFG.lat},${CFG.lng}&destination_place_id=${CFG.placeId}&travelmode=driving`;
+// Waze: 'to=' es el destino (el enlace compartido traía 'from=', que es el punto de partida)
+$('#waze').href=`https://waze.com/ul?to=ll.${CFG.lat}%2C${CFG.lng}&navigate=yes`;
 const pad=n=>String(n).padStart(2,'0');
 (function(){const esApple=/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);const a=$('#ics');
   if(esApple){a.href='assets/grado-maik.ics';a.removeAttribute('download')}
