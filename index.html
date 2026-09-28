@@ -14,15 +14,19 @@
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="https://michaelzapataag.github.io/grado/">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/PixelifySans-Regular-maik.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Medium-maik.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-SemiBold-maik.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Bold-maik.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* Pixelify Sans con la H corregida (sin el diente sobre la barra); pesos estáticos parchados con fontTools */
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Regular-maik.ttf") format("truetype");font-weight:400;font-display:swap}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Medium-maik.ttf") format("truetype");font-weight:500;font-display:swap}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-SemiBold-maik.ttf") format("truetype");font-weight:600;font-display:swap}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Bold-maik.ttf") format("truetype");font-weight:700;font-display:swap}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Regular-maik.ttf") format("truetype");font-weight:400;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Medium-maik.ttf") format("truetype");font-weight:500;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-SemiBold-maik.ttf") format("truetype");font-weight:600;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Bold-maik.ttf") format("truetype");font-weight:700;font-display:block}
 :root{
   --ink:#241633;--ink2:#3a2450;--cream:#f8e9c8;--cream2:#e9d2a0;--sun:#ffd166;--sun2:#ffb347;
   --coral:#f08a4b;--rose:#d8624f;--plum:#7a2f63;--night:#1a1033;--teal:#7fd1c8;--ok:#5cb85c;--ok2:#3e8f3e;--no:#e5484d;--no2:#a8262b;
@@ -106,6 +110,7 @@ body[data-state="title"] #bg{display:none}
 .btnwrap>button{position:relative;z-index:1}
 .btnglow{position:absolute;left:50%;top:50%;width:150%;height:210%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(255,209,102,.5),rgba(255,209,102,.18) 40%,rgba(255,209,102,0) 68%);pointer-events:none;z-index:0;opacity:0}
 #contwrap{width:min(280px,100%);display:block}#contwrap .gbtn{width:100%}
+#contglow{width:124%;height:170%}
 .imgbtn:active,.imgbtn.pressed{background-image:url(assets/boton-presionado.png?v=3)}
 .title-bot .for{margin:0;display:flex;flex-direction:column;gap:2px;font-size:20px;line-height:1.15;padding:10px 18px 9px;background:rgba(22,12,36,.62);border:2px solid var(--ink);box-shadow:0 4px 0 rgba(10,6,16,.55);clip-path:polygon(4px 0,calc(100% - 4px) 0,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0 calc(100% - 4px),0 4px);backdrop-filter:blur(2px);text-shadow:2px 0 var(--ink),-2px 0 var(--ink),0 2px var(--ink),0 -2px var(--ink),0 3px 0 var(--ink)}
 .for div{opacity:0}
@@ -450,13 +455,13 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
   <section class="sec" id="regalos">
     <div class="sec-head rv"><span class="n">04</span><h2 class="out">Regalos</h2></div>
     <div class="panel rv regalos">
-      <p class="copy" id="regalo-copy" data-sg="Tu presencia ya es un regalo. Si además quieres darme algo, aquí está el QR:" data-pl="Su presencia ya es un regalo. Si además quieren darme algo, aquí está el QR:">Tu presencia ya es un regalo. Si además quieres darme algo, aquí está el QR:</p>
+      <p class="copy" id="regalo-copy" data-sg="Tu presencia ya es un regalo, pero si quieres darme algo, aquí está el QR:" data-pl="Su presencia ya es un regalo, pero si quieren darme algo, aquí está el QR:">Tu presencia ya es un regalo, pero si quieres darme algo, aquí está el QR:</p>
       <div class="qrbox"><img src="assets/qr-breb.png?v=5" alt="QR de Bre-B Bancolombia para transferir a Maik" draggable="false"></div>
       <div class="cuenta">
         <div><span class="hud">Llave Bre-B</span><b class="px" id="llave">1000893745</b><button class="copiar" data-copy="1000893745">Copiar</button></div>
         <div><span class="hud">Ahorros Bancolombia</span><b class="px" id="cta">551-62929-720</b><button class="copiar" data-copy="55162929720">Copiar</button></div>
       </div>
-      <p class="copy efectivo" data-sg="También puedes traer efectivo o regalos ;)" data-pl="También pueden traer efectivo o regalos ;)">También puedes traer efectivo o regalos ;)</p>
+      <p class="copy efectivo" data-sg="También puedes darme efectivo o regalos ;)" data-pl="También pueden darme efectivo o regalos ;)">También puedes darme efectivo o regalos ;)</p>
     </div>
   </section>
 
@@ -499,7 +504,7 @@ const CFG={
   voz:'sans',                             // voz del diálogo (ver VOCES y voz.html): sans | sans2 | txt1 | papyrus | asgore | sintéticas
   musica:{vol:.11,src:'assets/musica.mp3?v=5',                                   // fase 1 (carga → logro): songGRados para todos
     porGrupo:{Familia:'assets/musica-melibere.mp3?v=5',Nacional:'assets/musica-apelo.mp3?v=5',UPB:'assets/musica-apelo.mp3?v=5'}, // fase 2 (desde Continuar del logro): Me liberé / A pelo
-    porInvitado:{27:'assets/musica-mariana.mp3?v=5',32:'assets/musica-femboy.mp3?v=5'}, // excepciones por Nº de invitado: 27 = Rojas → "Dónde estás Mariana"; 32 = Franco → "Femboy ven pa ca"
+    porInvitado:{27:'assets/musica-mariana.mp3?v=5',32:'assets/musica-femboy.mp3?v=5',26:'assets/musica-miguel.mp3?v=5'}, // excepciones por Nº de invitado: 27 = Rojas → "Dónde estás Mariana"; 32 = Franco → "Femboy ven pa ca"
     fundido:1.6}, // canción de fondo en bucle por grupo del invitado (Familia / Nacional / UPB); src = la de respaldo               // Pj_Speaking: 4 frames de 112×128 en 2×2 (0 cerrada, 1 entreabierta, 2 cerrada, 3 abierta)
   cut:{fondo:'assets/cut-fondo.png?v=4',caja:'assets/cut-caja.png?v=4',flecha:'assets/cut-flecha.png?v=4'}, // ?v= fuerza recarga cuando cambia el arte (la caja vieja quedaba en caché en el iPhone) // piezas de la cinemática (caja y flecha dibujadas por Maik en Aseprite; si faltan se dibujan por código)
 };
@@ -571,31 +576,31 @@ const FX={
       .add(()=>{amb('#grad',{y:-6,duration:1.6,yoyo:true,repeat:-1,ease:'sine.inOut'});amb('#placawrap',{y:-3,duration:2.4,yoyo:true,repeat:-1,ease:'sine.inOut'});amb('#rays',{opacity:.7,duration:1.8,yoyo:true,repeat:-1,ease:'sine.inOut'});
         if(!reduce){gsap.timeline({repeat:-1,repeatDelay:3.2}).fromTo('#placawrap .shine',{backgroundPosition:'120% 0',opacity:1},{backgroundPosition:'-20% 0',duration:1.1,ease:'power1.inOut'}).set('#placawrap .shine',{opacity:0});
           gsap.timeline({repeat:-1,repeatDelay:2.6,delay:1}).to('#grad',{rotation:-2.5,duration:.18,ease:'sine.inOut'}).to('#grad',{rotation:2.5,duration:.22,ease:'sine.inOut'}).to('#grad',{rotation:0,duration:.35,ease:'back.out(2)'});
-          glow('#contglow');}if(!reduce)winConfetti=setInterval(()=>FXA.confetti(12),1400)});},
+          glow('#contglow',true);}if(!reduce)winConfetti=setInterval(()=>FXA.confetti(12),1400)});},
   menu(){gsap.fromTo('.nav',{yPercent:100},{yPercent:0,duration:.7,delay:.2});},
 };
-function glow(sel){gsap.killTweensOf(sel);gsap.set(sel,{opacity:0,scale:.9});gsap.to(sel,{opacity:.85,duration:.6});amb(sel,{scale:1.12,opacity:.55,duration:1.4,yoyo:true,repeat:-1,ease:'sine.inOut',delay:.6})}
+function glow(sel,suave=false){gsap.killTweensOf(sel);gsap.set(sel,{opacity:0,scale:suave?1:.9});gsap.to(sel,{opacity:suave?.6:.85,duration:.8});amb(sel,suave?{opacity:.3,duration:1.6,yoyo:true,repeat:-1,ease:'sine.inOut',delay:.8}:{scale:1.12,opacity:.55,duration:1.4,yoyo:true,repeat:-1,ease:'sine.inOut',delay:.6})}
 function reveal(el){
   if(el.classList.contains('sec-head')){const n=el.querySelector('.n'),h=el.querySelector('h2');
     if(h&&!h.dataset.split){h.dataset.split='1';h.innerHTML=h.innerHTML.split(/(<br\s*\/?>)/i).map(part=>/^<br/i.test(part)?part:[...part].map(ch=>ch===' '?' ':`<span class="l">${ch}</span>`).join('')).join('')}
     gsap.set(el,{autoAlpha:1});
-    gsap.fromTo(n,{scale:0,rotation:-25,autoAlpha:0},{scale:1,rotation:0,autoAlpha:1,duration:.6,ease:'back.out(2.5)'});
-    gsap.fromTo(h.querySelectorAll('.l'),{y:18,autoAlpha:0,scale:.7},{y:0,autoAlpha:1,scale:1,duration:.45,stagger:.03,ease:'back.out(2)',delay:.1,onComplete(){const r=n.getBoundingClientRect();FXA.sparkle(r.left+r.width/2,r.top+r.height/2,8)}});
+    gsap.fromTo(n,{scale:.6,rotation:-12,autoAlpha:0},{scale:1,rotation:0,autoAlpha:1,duration:.45,ease:'back.out(1.8)'});
+    gsap.fromTo(h.querySelectorAll('.l'),{y:8,autoAlpha:0},{y:0,autoAlpha:1,duration:.3,stagger:.015,ease:'power2.out',delay:.05,onComplete(){const r=n.getBoundingClientRect();FXA.sparkle(r.left+r.width/2,r.top+r.height/2,8)}});
     return}
   if(el.classList.contains('panel')){const kids=[...el.children].filter(c=>!c.classList.contains('box9'));
-    gsap.fromTo(el,{y:34,scale:.96,autoAlpha:0},{y:0,scale:1,autoAlpha:1,duration:.7,ease:'back.out(1.4)',clearProps:'transform'});
-    gsap.fromTo(kids,{y:14,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,stagger:.08,delay:.2,ease:'power3.out',clearProps:'transform',onComplete(){seccionLista(el)}});
+    gsap.fromTo(el,{y:16,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'power2.out',clearProps:'transform'});
+    gsap.fromTo(kids,{y:8,autoAlpha:0},{y:0,autoAlpha:1,duration:.4,stagger:.05,delay:.08,ease:'power2.out',clearProps:'transform',onComplete(){seccionLista(el)}});
     return}
   gsap.fromTo(el,{y:28,autoAlpha:0},{y:0,autoAlpha:1,duration:.85,ease:'power3.out',overwrite:'auto',clearProps:el.classList.contains('credits')?'':'transform'})}
 function seccionLista(panel){const sec=panel.closest('.sec');if(!sec||panel.dataset.listo)return;panel.dataset.listo='1';
   if(sec.id==='cuando'&&panel.querySelector('.cd')){
-    gsap.fromTo('.date .big',{scale:.4,rotation:-10,autoAlpha:0},{scale:1,rotation:0,autoAlpha:1,duration:.8,ease:'elastic.out(1,.5)'});
-    gsap.fromTo('.cd b',{scale:.6,autoAlpha:0},{scale:1,autoAlpha:1,stagger:.1,duration:.5,ease:'back.out(2)',delay:.3});}
+    gsap.fromTo('.date .big',{scale:.7,autoAlpha:0},{scale:1,autoAlpha:1,duration:.6,ease:'back.out(1.8)'});
+    gsap.fromTo('.cd b',{y:10,autoAlpha:0},{y:0,autoAlpha:1,stagger:.06,duration:.4,ease:'power2.out',delay:.15});}
   if(sec.id==='donde'){const pulse=(sel,d)=>amb(sel,{scale:4.5,opacity:0,duration:1.6,repeat:-1,ease:'power1.out',delay:d,startAt:{scale:1,opacity:1}});pulse('.pinpulse:not(.p2)',0);pulse('.pinpulse.p2',.8);
-    gsap.fromTo('.map',{scale:.92,autoAlpha:0},{scale:1,autoAlpha:1,duration:.7,ease:'back.out(1.6)'});gsap.fromTo('#donde .pbtn',{y:12,autoAlpha:0},{y:0,autoAlpha:1,stagger:.1,duration:.45,clearProps:'transform'});}
-  if(sec.id==='regalos'){gsap.fromTo('.qrbox',{scale:.6,rotation:-6,autoAlpha:0},{scale:1,rotation:0,autoAlpha:1,duration:.9,ease:'elastic.out(1,.5)',onComplete(){const r=$('.qrbox').getBoundingClientRect();FXA.sparkle(r.left+r.width/2,r.top,12)}});
-    gsap.fromTo('.copiar',{scale:.5,autoAlpha:0},{scale:1,autoAlpha:1,stagger:.12,duration:.5,ease:'back.out(2.5)',delay:.5,clearProps:'transform'});}
-  if(sec.id==='confirmar'){gsap.fromTo('#rsvp-btns .pbtn',{x:-30,autoAlpha:0},{x:0,autoAlpha:1,stagger:.15,duration:.55,ease:'back.out(1.8)',clearProps:'transform'});amb('#rsvp-si',{scale:1.025,duration:1.1,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1,transformOrigin:'50% 50%'});}
+    gsap.fromTo('.map',{scale:.97,autoAlpha:0},{scale:1,autoAlpha:1,duration:.5,ease:'power2.out'});gsap.fromTo('#donde .pbtn',{y:8,autoAlpha:0},{y:0,autoAlpha:1,stagger:.06,duration:.35,clearProps:'transform'});}
+  if(sec.id==='regalos'){gsap.fromTo('.qrbox',{scale:.9,autoAlpha:0},{scale:1,autoAlpha:1,duration:.6,ease:'back.out(1.6)',onComplete(){const r=$('.qrbox').getBoundingClientRect();FXA.sparkle(r.left+r.width/2,r.top,12)}});
+    gsap.fromTo('.copiar',{scale:.8,autoAlpha:0},{scale:1,autoAlpha:1,stagger:.08,duration:.4,ease:'back.out(2)',delay:.25,clearProps:'transform'});}
+  if(sec.id==='confirmar'){gsap.fromTo('#rsvp-btns .pbtn',{y:10,autoAlpha:0},{y:0,autoAlpha:1,stagger:.1,duration:.45,ease:'power2.out',clearProps:'transform'});amb('#rsvp-si',{scale:1.025,duration:1.1,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1,transformOrigin:'50% 50%'});}
   if(sec.id==='final'){const b=$('.bye .px');if(b&&!b.dataset.split){b.dataset.split='1';b.innerHTML=b.innerHTML.split(/(<br\s*\/?>)/i).map(part=>/^<br/i.test(part)?part:[...part].map(ch=>ch===' '?' ':`<span class="l">${ch}</span>`).join('')).join('')}}}
 function punch(t,vars={}){return gsap.fromTo(t,{scale:vars.from||1.35,rotation:vars.rot||0},{scale:1,rotation:0,duration:vars.dur||.6,ease:vars.ease||'elastic.out(1,.45)',overwrite:'auto'})}
 $('#limite').textContent=CFG.limite;
@@ -1168,7 +1173,7 @@ const panelRO=new ResizeObserver(()=>{if(document.body.dataset.state==='menu')dr
 function startMenu(){
   if(menuStarted)return;menuStarted=true;dressPanels();
   document.querySelectorAll('.nav canvas').forEach(c=>mapToCanvas(c,ICONS[c.dataset.ico]));
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){reveal(e.target);io.unobserve(e.target)}}),{threshold:.1,rootMargin:'0px 0px -30px'});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){reveal(e.target);io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px 12% 0px'});   // se revela un poco antes de asomar, para que no parezca que aparece de golpe
   document.querySelectorAll('#menu .rv').forEach(el=>io.observe(el));
   const navIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav a').forEach(a=>{const on=a.dataset.sec===e.target.id;if(on&&!a.classList.contains('on'))punch(a.querySelector('canvas'),{from:.6,ease:'back.out(3)',dur:.45});a.classList.toggle('on',on)});
     const logros={donde:'Ruta trazada',final:'Capítulo completo'};if(logros[e.target.id])unlock(e.target.id,logros[e.target.id]);
@@ -1176,7 +1181,7 @@ function startMenu(){
   document.querySelectorAll('.sec').forEach(s=>navIO.observe(s));
   tick();setInterval(tick,1000);
   const byeIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){byeIO.unobserve(e.target);const b=e.target;if(!b.dataset.split){b.dataset.split='1';b.innerHTML=b.innerHTML.split(/(<br\s*\/?>)/i).map(part=>/^<br/i.test(part)?part:[...part].map(ch=>ch===' '?' ':`<span class="l">${ch}</span>`).join('')).join('')}
-    gsap.fromTo(b.querySelectorAll('.l'),{y:16,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,stagger:.035,ease:'back.out(2)',onComplete(){const r=b.getBoundingClientRect();FXA.sparkle(r.left+r.width/2,r.top+r.height/2,18);FXA.confetti(40)}})}}),{threshold:.6});
+    gsap.fromTo(b.querySelectorAll('.l'),{y:8,autoAlpha:0},{y:0,autoAlpha:1,duration:.35,stagger:.02,ease:'power2.out',onComplete(){const r=b.getBoundingClientRect();FXA.sparkle(r.left+r.width/2,r.top+r.height/2,18);FXA.confetti(40)}})}}),{threshold:.6});
   document.querySelectorAll('.bye .px').forEach(b=>byeIO.observe(b));
   if(!reduce){addEventListener('scroll',()=>{gsap.to('.menu-bg',{y:-scrollY*.08,duration:.4,ease:'power2.out',overwrite:true})},{passive:true});
     setInterval(()=>{if(document.body.dataset.state==='menu'&&!document.hidden)FXA.sparkle(Math.random()*innerWidth,Math.random()*innerHeight*.9,3,['#9b92d6','#c8c1f0','#ffd166'])},900)}
