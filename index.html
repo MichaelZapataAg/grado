@@ -511,9 +511,8 @@ const CFG={
   speak:'assets/speak.png?v=4',
   voz:'sans',                             // voz del diálogo (ver VOCES y voz.html): sans | sans2 | txt1 | papyrus | asgore | sintéticas
   musica:{vol:.11,src:'assets/musica.mp3?v=7',                                   // fase 1 (carga → logro): songGRados para todos
-    porGrupo:{Familia:'assets/musica-telefono.mp3?v=7',Nacional:'assets/musica-apelo.mp3?v=7',UPB:'assets/musica-apelo.mp3?v=7'}, // fase 2 (desde Continuar del logro): Teléfono nuevo (desde 1:35) / A pelo
+    porGrupo:{Familia:'assets/musica-eoo.mp3?v=7',Nacional:'assets/musica-apelo.mp3?v=7',UPB:'assets/musica-apelo.mp3?v=7'}, // fase 2 (desde Continuar del logro): EoO / A pelo
     porInvitado:{27:'assets/musica-mariana.mp3?v=7',32:'assets/musica-femboy.mp3?v=7',26:'assets/musica-miguel.mp3?v=7'}, // excepciones por Nº de invitado: 27 = Rojas → "Dónde estás Mariana"; 32 = Franco → "Femboy ven pa ca"
-    inicio:{'assets/musica-telefono.mp3?v=7':95},                           // segundo desde el que arranca la PRIMERA vez (las vueltas empiezan desde 0)
     fundido:1.6}, // canción de fondo en bucle por grupo del invitado (Familia / Nacional / UPB); src = la de respaldo               // Pj_Speaking: 4 frames de 112×128 en 2×2 (0 cerrada, 1 entreabierta, 2 cerrada, 3 abierta)
   cut:{fondo:'assets/cut-fondo.png?v=4',caja:'assets/cut-caja.png?v=4',flecha:'assets/cut-flecha.png?v=4'}, // ?v= fuerza recarga cuando cambia el arte (la caja vieja quedaba en caché en el iPhone) // piezas de la cinemática (caja y flecha dibujadas por Maik en Aseprite; si faltan se dibujan por código)
 };
