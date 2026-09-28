@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>El grado de Maik</title>
 <meta name="theme-color" content="#1a1033">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -14,19 +15,19 @@
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="https://michaelzapataag.github.io/grado/">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="assets/fonts/PixelifySans-Regular-maik.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="assets/fonts/PixelifySans-Medium-maik.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="assets/fonts/PixelifySans-SemiBold-maik.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="assets/fonts/PixelifySans-Bold-maik.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Regular-maik.ttf?v=2" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Medium-maik.ttf?v=2" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-SemiBold-maik.ttf?v=2" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/PixelifySans-Bold-maik.ttf?v=2" as="font" type="font/ttf" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* Pixelify Sans con la H corregida (sin el diente sobre la barra); pesos estáticos parchados con fontTools */
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Regular-maik.ttf") format("truetype");font-weight:400;font-display:block}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Medium-maik.ttf") format("truetype");font-weight:500;font-display:block}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-SemiBold-maik.ttf") format("truetype");font-weight:600;font-display:block}
-@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Bold-maik.ttf") format("truetype");font-weight:700;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Regular-maik.ttf?v=2") format("truetype");font-weight:400;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Medium-maik.ttf?v=2") format("truetype");font-weight:500;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-SemiBold-maik.ttf?v=2") format("truetype");font-weight:600;font-display:block}
+@font-face{font-family:"Pixelify Sans";src:url("assets/fonts/PixelifySans-Bold-maik.ttf?v=2") format("truetype");font-weight:700;font-display:block}
 :root{
   --ink:#241633;--ink2:#3a2450;--cream:#f8e9c8;--cream2:#e9d2a0;--sun:#ffd166;--sun2:#ffb347;
   --coral:#f08a4b;--rose:#d8624f;--plum:#7a2f63;--night:#1a1033;--teal:#7fd1c8;--ok:#5cb85c;--ok2:#3e8f3e;--no:#e5484d;--no2:#a8262b;
@@ -109,8 +110,9 @@ body[data-state="title"] #bg{display:none}
 .btnwrap{position:relative;display:inline-block}
 .btnwrap>button{position:relative;z-index:1}
 .btnglow{position:absolute;left:50%;top:50%;width:150%;height:210%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(255,209,102,.5),rgba(255,209,102,.18) 40%,rgba(255,209,102,0) 68%);pointer-events:none;z-index:0;opacity:0}
-#contwrap{width:min(280px,100%);display:block}#contwrap .gbtn{width:100%}
+#contwrap{width:280px;height:64px;display:block;position:relative}
 #contglow{width:124%;height:170%}
+@media(max-width:320px){#contwrap,#contwrap .gbtn,#contwrap .gbtn .box9{width:260px}}
 .imgbtn:active,.imgbtn.pressed{background-image:url(assets/boton-presionado.png?v=3)}
 .title-bot .for{margin:0;display:flex;flex-direction:column;gap:2px;font-size:20px;line-height:1.15;padding:10px 18px 9px;background:rgba(22,12,36,.62);border:2px solid var(--ink);box-shadow:0 4px 0 rgba(10,6,16,.55);clip-path:polygon(4px 0,calc(100% - 4px) 0,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0 calc(100% - 4px),0 4px);backdrop-filter:blur(2px);text-shadow:2px 0 var(--ink),-2px 0 var(--ink),0 2px var(--ink),0 -2px var(--ink),0 3px 0 var(--ink)}
 .for div{opacity:0}
@@ -212,8 +214,8 @@ body[data-state="win"] #bg{display:none}
 .win-hero{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:6px}
 #grad{height:420px;max-height:48dvh;width:auto;image-rendering:pixelated;display:block;transform-origin:50% 100%;position:relative;z-index:1}
 /* botón dorado tipo cápsula (misma pieza que el play del inicio) */
-.gbtn{position:relative;width:min(280px,100%);height:64px;font-family:var(--px);font-weight:700;font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:#2a1a2e;padding:0 24px 8px;line-height:1}
-.gbtn .box9{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;z-index:0;display:block}
+.gbtn{position:relative;display:flex;align-items:center;justify-content:center;width:280px;height:64px;box-sizing:border-box;font-family:var(--px);font-weight:700;font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:#2a1a2e;padding:0 24px 8px;line-height:1;cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;appearance:none;-webkit-appearance:none}
+.gbtn .box9{position:absolute;left:0;top:0;width:280px;height:64px;image-rendering:pixelated;z-index:0;display:block;pointer-events:none}
 .gbtn span{position:relative;z-index:1;display:block;transition:transform .08s}
 .gbtn.pressed span{transform:translateY(6px)}
 .gbtn.pressed{color:#1a1420}
@@ -271,7 +273,8 @@ body[data-state="win"] #bg{display:none}
 .regalos .cuenta{display:grid;gap:12px;margin-top:16px}
 .regalos .cuenta div{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
 .regalos .cuenta .hud{grid-column:1/-1}
-.regalos .cuenta b{font-size:22px;letter-spacing:.04em;color:var(--white);font-weight:700}
+.regalos .cuenta b{font-size:22px;letter-spacing:.04em;color:var(--white);font-weight:700;text-decoration:none}
+.regalos .cuenta b a{color:inherit;text-decoration:none;pointer-events:none}
 .copiar{font-family:var(--hud);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--sun);border:2px solid #1a1420;box-shadow:2px 2px 0 #1a1420;padding:7px 10px 6px}
 .copiar:active{transform:translate(2px,2px);box-shadow:0 0 0 #1a1420}
 .rsvp-done.no{background:#f3d9d4}
@@ -410,7 +413,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
   <canvas class="cut-frame" id="winframe" aria-hidden="true"></canvas>
   <div id="placawrap"><img id="placa" src="assets/placa.png?v=4" alt="Logro desbloqueado: Ingeniero en Diseño de Entretenimiento Digital, 2026" draggable="false"><div class="shine" aria-hidden="true"></div></div>
   <div class="win-hero"><img id="grad" src="assets/graduado.png" alt="Maik graduado" draggable="false"></div>
-  <span class="btnwrap" id="contwrap"><i class="btnglow" id="contglow" aria-hidden="true"></i><button class="gbtn" id="cont"><canvas class="box9" aria-hidden="true"></canvas><span>Continuar ▶</span></button></span>
+  <div class="btnwrap" id="contwrap"><i class="btnglow" id="contglow" aria-hidden="true"></i><div class="gbtn" id="cont" role="button" tabindex="0"><canvas class="box9" width="140" height="32" aria-hidden="true"></canvas><span>Continuar ▶</span></div></div>
 </section>
 
 <!-- MENU -->
@@ -426,7 +429,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
     </div>
     <div class="panel rv" style="margin-top:18px">
       <span class="hud" style="color:var(--plum)">Mi historia</span>
-      <p class="copy" style="margin-top:8px">Esto no es solo un grado. Es cerrar cuatro años de proyectos, entregas, renders, bugs y noches sin dormir. Y quiero cerrarlos con la gente que quiero. <b data-sg="Tú estás en la lista." data-pl="Ustedes están en la lista.">Tú estás en la lista.</b></p>
+      <p class="copy" style="margin-top:8px">Esto no es solo un grado. Es cerrar cuatro años de proyectos, entregas, renders, bugs y noches sin dormir. Y me encantaría cerrarlos con la gente que quiero. <b data-sg="Tú estás en la lista." data-pl="Ustedes están en la lista.">Tú estás en la lista.</b></p>
     </div>
   </section>
 
@@ -455,7 +458,7 @@ body[data-state="menu"] #bg,body[data-state="menu"] .dim{display:none}
   <section class="sec" id="regalos">
     <div class="sec-head rv"><span class="n">04</span><h2 class="out">Regalos</h2></div>
     <div class="panel rv regalos">
-      <p class="copy" id="regalo-copy" data-sg="Tu presencia ya es un regalo, pero si quieres darme algo, aquí está el QR:" data-pl="Su presencia ya es un regalo, pero si quieren darme algo, aquí está el QR:">Tu presencia ya es un regalo, pero si quieres darme algo, aquí está el QR:</p>
+      <p class="copy" id="regalo-copy" data-sg="Tu presencia ya es un regalo, pero si quieres darme algo más, aquí está el QR:" data-pl="Su presencia ya es un regalo, pero si quieren darme algo más, aquí está el QR:">Tu presencia ya es un regalo, pero si quieres darme algo, aquí está el QR:</p>
       <div class="qrbox"><img src="assets/qr-breb.png?v=5" alt="QR de Bre-B Bancolombia para transferir a Maik" draggable="false"></div>
       <div class="cuenta">
         <div><span class="hud">Llave Bre-B</span><b class="px" id="llave">1000893745</b><button class="copiar" data-copy="1000893745">Copiar</button></div>
@@ -497,7 +500,8 @@ const CFG={
   fecha:new Date(2026,9,17,19,0,0),
   inicio:new Date(2026,8,1,0,0,0),
   limite:'10 de octubre',
-  dir:'Calle 107 #86-76',ciudad:'Medellín',
+  dir:'Calle 107 #86-76',ciudad:'Medellín',barrio:'El Triunfo, Doce de Octubre',
+  lat:6.3090968,lng:-75.5845471,mapsUrl:'https://maps.app.goo.gl/wcXk2NduQgruTabT7',wazeUrl:'https://ul.waze.com/ul?from=place.ChIJiZkNPd0uRI4R7JZytKTjuRg&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location',   // pin exacto de la casa (enlace de Maik, 2026-09-27)
   url:location.origin+location.pathname,
   portrait:'assets/portrait.png?v=4',
   speak:'assets/speak.png?v=4',
@@ -513,7 +517,7 @@ const per=x=>{const m=x.trim().match(/^(.*?)\s*[:(]\s*(f|m)\)?$/i);return m?[m[1
 let nombres=(q.get('n')||CFG.nombreDefault).split(',').filter(x=>x.trim()).map(per);
 let especiales=(q.get('e')||'').split(',').filter(x=>x.trim()).map(per);
 let nombre=nombres[0]?nombres[0][0]:'';
-let num=Math.max(1,parseInt(q.get('i')||'1',10)||1);let cupos=parseInt(q.get('c')||'',10)||null;let grupo=q.get('g')||'';
+let num=Math.max(1,parseInt(q.get('i')||'1',10)||1);let cupos=parseInt(q.get('c')||'',10)||null;let grupo=q.get('g')||'';let familia=q.get('f')==='1';
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=s=>document.querySelector(s);
 /* ============ MOTION (GSAP): entradas fluidas, nada de steps() ============ */
@@ -572,7 +576,7 @@ const FX={
       .fromTo('#rays',{autoAlpha:0,scale:.6},{autoAlpha:.9,scale:1,duration:1,ease:'power2.out'},0)
       .fromTo('#placawrap',{scale:.5,autoAlpha:0,y:-30},{scale:1,autoAlpha:1,y:0,duration:1,ease:'elastic.out(1,.55)',onStart(){setTimeout(()=>{const r=$('#placa').getBoundingClientRect();FXA.sparkle(r.left+r.width*.2,r.top+r.height*.5,10);FXA.sparkle(r.left+r.width*.8,r.top+r.height*.5,10);shake('#s-win',3,3)},250)}},.15)
       .fromTo('#grad',{y:60,scale:.6,autoAlpha:0},{y:0,scale:1,autoAlpha:1,duration:.8,ease:'back.out(1.5)',onComplete(){const r=$('#grad').getBoundingClientRect();FXA.sparkle(r.left+r.width/2,r.top+r.height*.3,22);FXA.confetti(70)}},.45)
-      .fromTo('#contwrap',{y:18,autoAlpha:0},{y:0,autoAlpha:1,clearProps:'transform',onComplete(){drawGbtn($('#cont'))}},1.2)
+      .fromTo('#contwrap',{y:18,autoAlpha:0},{y:0,autoAlpha:1},1.2)
       .add(()=>{amb('#grad',{y:-6,duration:1.6,yoyo:true,repeat:-1,ease:'sine.inOut'});amb('#placawrap',{y:-3,duration:2.4,yoyo:true,repeat:-1,ease:'sine.inOut'});amb('#rays',{opacity:.7,duration:1.8,yoyo:true,repeat:-1,ease:'sine.inOut'});
         if(!reduce){gsap.timeline({repeat:-1,repeatDelay:3.2}).fromTo('#placawrap .shine',{backgroundPosition:'120% 0',opacity:1},{backgroundPosition:'-20% 0',duration:1.1,ease:'power1.inOut'}).set('#placawrap .shine',{opacity:0});
           gsap.timeline({repeat:-1,repeatDelay:2.6,delay:1}).to('#grad',{rotation:-2.5,duration:.18,ease:'sine.inOut'}).to('#grad',{rotation:2.5,duration:.22,ease:'sine.inOut'}).to('#grad',{rotation:0,duration:.35,ease:'back.out(2)'});
@@ -605,16 +609,17 @@ function seccionLista(panel){const sec=panel.closest('.sec');if(!sec||panel.data
 function punch(t,vars={}){return gsap.fromTo(t,{scale:vars.from||1.35,rotation:vars.rot||0},{scale:1,rotation:0,duration:vars.dur||.6,ease:vars.ease||'elastic.out(1,.45)',overwrite:'auto'})}
 $('#limite').textContent=CFG.limite;
 let plural=false;
-function aplicarPlural(){const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;plural=(nombres.length+especiales.length+extra)>1;document.querySelectorAll('[data-sg]').forEach(e=>{e.textContent=plural?e.dataset.pl:e.dataset.sg})}
+function aplicarPlural(){const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;plural=familia||(nombres.length+especiales.length+extra)>1;document.querySelectorAll('[data-sg]').forEach(e=>{e.textContent=plural?e.dataset.pl:e.dataset.sg})}
 function aplicarInvitado(){aplicarPlural();
-  const solos=nombres.map(x=>x[0]);$('#lobbyname').textContent=solos.join(', ')||'Tú';$('#credname').textContent=solos.join(' · ')||'Tú';
+  const solos=nombres.map(x=>x[0]);const etiqueta=familia?`${solos[0]||'Tú'} y familia`:(solos.length>1?solos.slice(0,-1).join(', ')+' y '+solos[solos.length-1]:(solos[0]||'Tú'));$('#lobbyname').textContent=etiqueta;$('#credname').textContent=etiqueta;
   document.querySelectorAll('#pnum,.pnum').forEach(e=>e.textContent=num);
   const gl=$('#guestlist');gl.innerHTML='';const lines=[];
   const extra=cupos?Math.max(0,cupos-nombres.length-especiales.length):0;const solo=nombres.length<=1&&!especiales.length&&!extra;
   const inv=g=>g==='f'?'Invitada':'Invitado';
-  if(nombres.length)nombres.forEach(([n,g],i)=>lines.push([solo?inv(g)+':':`${inv(g)} ${i+1}:`,n,false]));else lines.push(['Invitado:','Tú',false]);
+  if(familia&&nombres.length)lines.push(['Invitados:',`${nombres[0][0]} y familia`,false]);
+  else if(nombres.length)nombres.forEach(([n,g])=>lines.push([inv(g)+':',n,false]));else lines.push(['Invitado:','Tú',false]);   // sin numerar: "Invitada: Tay", "Invitado: Papá de Alana"
   especiales.forEach(([n,g])=>lines.push([inv(g)+' especial:',n,true]));
-  if(extra>0)lines.push([extra===1?'Acompañante:':'Acompañantes:',String(extra),false]);
+  if(extra>0&&!familia)lines.push([extra===1?'Acompañante:':'Acompañantes:',String(extra),false]);
   lines.forEach(([l,n,esp],i)=>{const d=document.createElement('div');if(esp)d.className='esp';const nm=n.replace(/</g,'&lt;');d.innerHTML=esp?`<i class="star"></i>${l} <b>${nm}</b><i class="star p"></i><i class="star s" style="right:-2px;top:-8px"></i>`:`${l} <b>${nm}</b>`;gl.appendChild(d)});
   if(titleIn)animGuests();
   const quien=nombre?`soy ${nombre}. `:'';const wa=`https://wa.me/${CFG.wa}?text=`+encodeURIComponent(`Hola Maik, ${quien}Te escribo por lo de tu grado el 17 de octubre: `);
@@ -628,18 +633,17 @@ aplicarInvitado();
     const tabla=await (await fetch('invitados.json',{cache:'no-store'})).json();const b64=tabla[id];if(!b64)return;
     const raw=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const key=await crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',enc.encode(k)),'AES-GCM',false,['decrypt']);
     const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:raw.slice(0,12)},key,raw.slice(12));const d=JSON.parse(new TextDecoder().decode(plain));
-    nombres=(d.n||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);especiales=(d.e||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);nombre=nombres[0]?nombres[0][0]:'';num=d.i||num;cupos=d.c||null;grupo=d.g||grupo;aplicarInvitado();}catch(e){console.error('invitación',e)}
+    nombres=(d.n||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);especiales=(d.e||[]).map(x=>Array.isArray(x)?x:[String(x),'m']);nombre=nombres[0]?nombres[0][0]:'';num=d.i||num;cupos=d.c||null;grupo=d.g||grupo;familia=!!d.f;aplicarInvitado();}catch(e){console.error('invitación',e)}
   finally{cargarMusica()}
 })();
 if(!(q.get('k')||'').trim())setTimeout(()=>cargarMusica(),0);   // sin código: canción por ?g= o la de respaldo (diferido: MUS se define más abajo)
 const dirQ=encodeURIComponent(`${CFG.dir}, ${CFG.ciudad}`);
-$('#gmaps').href=`https://www.google.com/maps/search/?api=1&query=${dirQ}`;
-$('#waze').href=`https://waze.com/ul?q=${dirQ}&navigate=yes`;
+$('#gmaps').href=CFG.mapsUrl||`https://www.google.com/maps/search/?api=1&query=${CFG.lat},${CFG.lng}`;
+$('#waze').href=CFG.wazeUrl||`https://waze.com/ul?ll=${CFG.lat},${CFG.lng}&navigate=yes&zoom=17`;
 const pad=n=>String(n).padStart(2,'0');
-const icsDate=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-const finD=new Date(CFG.fecha.getTime()+5*3600e3);
-const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Maik//Grado//ES','BEGIN:VEVENT',`UID:grado-michael-2026@${location.host||'local'}`,`DTSTART:${icsDate(CFG.fecha)}`,`DTEND:${icsDate(finD)}`,'SUMMARY:Grado de Maik',`LOCATION:${CFG.dir}\\, ${CFG.ciudad}`,`DESCRIPTION:El grado de Maik. ${CFG.url}`,'END:VEVENT','END:VCALENDAR'].join('\r\n');
-$('#ics').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+(function(){const esApple=/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);const a=$('#ics');
+  if(esApple){a.href='assets/grado-maik.ics';a.removeAttribute('download')}
+  else{const g=new URLSearchParams({action:'TEMPLATE',text:'Grado de Maik',dates:'20261018T000000Z/20261018T050000Z',details:'El grado de Maik. Sábado 17 de octubre de 2026, 7:00 pm. Mapa: '+CFG.mapsUrl,location:`${CFG.dir}, ${CFG.ciudad}`});a.href='https://calendar.google.com/calendar/render?'+g.toString();a.target='_blank';a.rel='noopener';a.removeAttribute('download')}})();
 
 /* ============ SONIDO chiptune ============ */
 let AC=null,sndOn=true;                                   // sonido activado por defecto; el navegador lo libera con el primer toque
@@ -812,7 +816,7 @@ const FXA=(()=>{const cv=$('#fxall'),cx=cv.getContext('2d');let ps=[];const D=Ma
 /* ============ FONDO DE LA CINEMÁTICA (provisional; se reemplaza por CFG.cut.fondo si existe) ============ */
 const cutImgs={};['fondo','caja','flecha'].forEach(k=>{const im=new Image();im.onload=()=>{cutImgs[k]=im;applyCutAssets()};im.src=CFG.cut[k]});
 const capImgs={};[['norm','assets/boton-capsula.png?v=4'],['press','assets/boton-capsula-presionada.png?v=4']].forEach(([k,src])=>{const im=new Image();im.onload=()=>{capImgs[k]=im;document.querySelectorAll('.gbtn').forEach(b=>drawGbtn(b))};im.src=src});
-function drawGbtn(btn,pressed=false){const c=btn.querySelector('.box9');const img=capImgs[pressed?'press':'norm'];if(!c||!img)return;nineSlice(c,img,Math.round(btn.clientWidth/SCALE),Math.round(btn.clientHeight/SCALE),12)}
+function drawGbtn(btn,pressed=false){const c=btn.querySelector('.box9');const img=capImgs[pressed?'press':'norm'];if(!c||!img)return;const W=Math.round((btn.clientWidth||280)/SCALE)||140,H=Math.round((btn.clientHeight||64)/SCALE)||32;nineSlice(c,img,W,H,12)}
 document.querySelectorAll('.gbtn').forEach(btn=>{btn.addEventListener('pointerdown',()=>{btn.classList.add('pressed');drawGbtn(btn,true);if(navigator.vibrate)navigator.vibrate(8)});['pointerup','pointercancel','pointerleave'].forEach(ev=>btn.addEventListener(ev,()=>{btn.classList.remove('pressed');drawGbtn(btn,false)}))});
 function applyCutAssets(){
   if(document.body.dataset.state==='cut')drawCutUI();
@@ -1122,7 +1126,7 @@ function toTitle(){clearInterval(bootT);clearTimeout(bootEnd);DIP.done=true;if(d
 $('#s-boot').addEventListener('click',toTitle);
 
 /* cinemática */
-let lines=[];const getLines=()=>[nombre?`¡Hola, <em>${nombres.map(x=>x[0]).join(' y ')}</em>!`:'¡Hola!','Después de años de proyectos, entregas, renders, bugs y noches sin dormir… llegó este gran momento.',(plural?'Pero antes de la fiesta necesito su ayuda con una última misión.':'Pero antes de la fiesta necesito tu ayuda con una última misión.')];
+let lines=[];const getLines=()=>[nombre?`¡Hola, <em>${familia?nombres[0][0]+' y familia':nombres.map(x=>x[0]).join(' y ')}</em>!`:'¡Hola!','Después de años de proyectos, entregas, renders, bugs y noches sin dormir… llegó este gran momento.',(plural?'Pero antes de la fiesta necesito su ayuda con una última misión.':'Pero antes de la fiesta necesito tu ayuda con una última misión.')];
 let li=0,typing=null;
 function buildLine(html){const el=$('#dlg');el.innerHTML='';const chars=[],ems=[];
   const parts=html.split(/(<em>.*?<\/em>)/g).filter(Boolean);
@@ -1162,6 +1166,7 @@ function advance(){if(waitT){clearTimeout(waitT);waitT=null;typeLine();return}if
 $('#s-cut').addEventListener('click',e=>{if(e.target.closest('#skip'))return;advance()});
 $('#skip').addEventListener('click',e=>{e.stopPropagation();if(typing)finishLine();go('game')});
 $('#cont').addEventListener('click',()=>{beep(784,.1);const g=cancionFase2();if(g)cambiarMusica(g);go('menu')});
+$('#cont').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('#cont').click()}});
 
 /* menú */
 let menuStarted=false;
